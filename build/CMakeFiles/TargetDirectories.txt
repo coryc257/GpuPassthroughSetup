@@ -1,0 +1,8 @@
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/install/strip.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/install/local.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/install.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/list_install_components.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/rebuild_cache.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/edit_cache.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/gpupassthroughsetup.dir
+/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/gpupassthroughsetup_autogen.dir

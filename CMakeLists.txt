@@ -12,8 +12,11 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5Widgets CONFIG REQUIRED)
 
 set(gpupassthroughsetup_SRC
+  src/daemonize.cpp
   src/main.cpp
-  src/gpupassthroughsetup.cpp
+  #//src/gpupassthroughsetup.cpp
+  src/exec_container.cpp
+  ui/Main.cpp
 )
 
 # Tell CMake to create the helloworld executable

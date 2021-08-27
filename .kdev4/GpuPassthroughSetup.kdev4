@@ -1,0 +1,41 @@
+[Buildset]
+BuildItems=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x01\x00\x00\x00&\x00G\x00p\x00u\x00P\x00a\x00s\x00s\x00t\x00h\x00r\x00o\x00u\x00g\x00h\x00S\x00e\x00t\x00u\x00p)
+
+[CMake]
+Build Directory Count=1
+Current Build Directory Index-Host System=0
+
+[CMake][CMake Build Directory 0]
+Build Directory Path=/home/el/projects/GpuPassthroughSetup/build
+Build Type=Debug
+CMake Binary=/usr/bin/cmake
+CMake Executable=/usr/bin/cmake
+Environment Profile=
+Extra Arguments=
+Install Directory=/usr/local
+Runtime=Host System
+
+[Launch]
+Launch Configurations=Launch Configuration 0
+
+[Launch][Launch Configuration 0]
+Configured Launch Modes=execute
+Configured Launchers=nativeAppLauncher
+Name=gpupassthroughsetup
+Type=Native Application
+
+[Launch][Launch Configuration 0][Data]
+Arguments=
+Dependencies=@Variant(\x00\x00\x00\t\x00\x00\x00\x00\x01\x00\x00\x00\x0b\x00\x00\x00\x00\x02\x00\x00\x00&\x00G\x00p\x00u\x00P\x00a\x00s\x00s\x00t\x00h\x00r\x00o\x00u\x00g\x00h\x00S\x00e\x00t\x00u\x00p\x00\x00\x00&\x00g\x00p\x00u\x00p\x00a\x00s\x00s\x00t\x00h\x00r\x00o\x00u\x00g\x00h\x00s\x00e\x00t\x00u\x00p)
+Dependency Action=Build
+EnvironmentGroup=
+Executable=file:///home/el/projects/GpuPassthroughSetup
+External Terminal=konsole --noclose --workdir %workdir -e %exe
+Kill Before Executing Again=4194304
+Project Target=GpuPassthroughSetup,gpupassthroughsetup
+Use External Terminal=false
+Working Directory=
+isExecutable=false
+
+[Project]
+VersionControlSupport=kdevgit

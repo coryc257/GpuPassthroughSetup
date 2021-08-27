@@ -39,6 +39,13 @@ public:
     static void SetUser(QString userName);
     static void GO();
 
+    static QString vmName;
+    static QString userName;
+    static QString vmConfig;
+    static QString normalConfig;
+    static QStringList deviceList;
+    static QStringList detachedDeviceList;
+
 private:
 
     static __EXEC_INSTANCE me;
@@ -62,12 +69,7 @@ private:
 
     static void DEBUG();
 
-    static QString vmName;
-    static QString userName;
-    static QString vmConfig;
-    static QString normalConfig;
-    static QStringList deviceList;
-    static QStringList detachedDeviceList;
+
     static bool debugOnly;
     static bool reloadNvidia;
 

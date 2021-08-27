@@ -54,6 +54,7 @@
         if (!QDir(CONFIG_FOLDER).exists()) {
             QDir().mkdir(CONFIG_FOLDER);
         }
+        Operations::__Init();
     }
 
     void Operations::SaveNonVmXConfig()

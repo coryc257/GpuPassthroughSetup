@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include <QScopedPointer>
 #include <QAction>
+#include <QResizeEvent>
 
 namespace Ui {
 class Main;
@@ -21,11 +22,21 @@ public:
 
 private:
     QScopedPointer<Ui::Main> m_ui;
+    void resizeEvent(QResizeEvent *e) override;
+    int originalHeight;
+    int scrollerOriginalHeight;
 
 private slots:
     void CloseMe();
     void Help();
     void Go();
+
+    // Finders
+    void finderVmName();
+
+    // Savers
+    void saveVmName();
+
 };
 
 #endif

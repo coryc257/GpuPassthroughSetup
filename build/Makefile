@@ -309,6 +309,33 @@ src/main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.s
 .PHONY : src/main.cpp.s
 
+ui/CommandOutputHelp.o: ui/CommandOutputHelp.cpp.o
+
+.PHONY : ui/CommandOutputHelp.o
+
+# target to build an object file
+ui/CommandOutputHelp.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o
+.PHONY : ui/CommandOutputHelp.cpp.o
+
+ui/CommandOutputHelp.i: ui/CommandOutputHelp.cpp.i
+
+.PHONY : ui/CommandOutputHelp.i
+
+# target to preprocess a source file
+ui/CommandOutputHelp.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.i
+.PHONY : ui/CommandOutputHelp.cpp.i
+
+ui/CommandOutputHelp.s: ui/CommandOutputHelp.cpp.s
+
+.PHONY : ui/CommandOutputHelp.s
+
+# target to generate assembly for a file
+ui/CommandOutputHelp.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.s
+.PHONY : ui/CommandOutputHelp.cpp.s
+
 ui/Main.o: ui/Main.cpp.o
 
 .PHONY : ui/Main.o
@@ -362,6 +389,9 @@ help:
 	@echo "... src/main.o"
 	@echo "... src/main.i"
 	@echo "... src/main.s"
+	@echo "... ui/CommandOutputHelp.o"
+	@echo "... ui/CommandOutputHelp.i"
+	@echo "... ui/CommandOutputHelp.s"
 	@echo "... ui/Main.o"
 	@echo "... ui/Main.i"
 	@echo "... ui/Main.s"

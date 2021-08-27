@@ -1,4 +1,4 @@
-/home/el/projects/GpuPassthroughSetup/build/gpupassthroughsetup_autogen/UYX5XTB5RZ/moc_Main.cpp: /home/el/projects/GpuPassthroughSetup/ui/Main.h \
+/home/el/projects/GpuPassthroughSetup/build/gpupassthroughsetup_autogen/UYX5XTB5RZ/moc_CommandOutputHelp.cpp: /home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.h \
   /home/el/projects/GpuPassthroughSetup/build/gpupassthroughsetup_autogen/moc_predefs.h \
   /usr/include/assert.h \
   /usr/include/c++/10/algorithm \
@@ -301,12 +301,11 @@
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qvector2d.h \
   /usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QAction \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMainWindow \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QDialog \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qaction.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qmainwindow.h \
+  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qsizepolicy.h \
-  /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgets-config.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h \
   /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h \

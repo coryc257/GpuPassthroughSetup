@@ -90,6 +90,11 @@
 			"UVLADIE3JM/moc_exec_container.cpp"
 		],
 		[
+			"/home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.h",
+			"MU",
+			"UYX5XTB5RZ/moc_CommandOutputHelp.cpp"
+		],
+		[
 			"/home/el/projects/GpuPassthroughSetup/ui/Main.h",
 			"MU",
 			"UYX5XTB5RZ/moc_Main.cpp"
@@ -150,6 +155,10 @@
 		[ "/home/el/projects/GpuPassthroughSetup/src/daemonize.cpp", "MU" ],
 		[ "/home/el/projects/GpuPassthroughSetup/src/exec_container.cpp", "MU" ],
 		[ "/home/el/projects/GpuPassthroughSetup/src/main.cpp", "MU" ],
+		[
+			"/home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.cpp",
+			"MU"
+		],
 		[ "/home/el/projects/GpuPassthroughSetup/ui/Main.cpp", "MU" ]
 	],
 	"UIC_OPTIONS" : [],

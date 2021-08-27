@@ -35,6 +35,9 @@ public:
     static void Init();
     static void SaveNonVmXConfig();
     static void SaveVmXConfig();
+    static void SaveVmXConfig(QString xConfig);
+    static void SetVmXConfig(QString xConfigFile);
+    static void SetQEmuCommandLine(QString vmName);
     static void SetVMName(QString vmName);
     static void SetUser(QString userName);
     static void GO();
@@ -46,20 +49,22 @@ public:
     static QStringList deviceList;
     static QStringList detachedDeviceList;
 
+    static BashCommandResult BashCommand(QString command);
+    static BashCommandResult BashCommandNoLog(QString command);
+    static QString CatThat(QString fileName);
+
 private:
 
     static __EXEC_INSTANCE me;
     static int pointOfFailure;
 
     static void WipeKScreen(QString userName);
-    static BashCommandResult BashCommand(QString command);
-    static BashCommandResult BashCommandNoLog(QString command);
     static void __Init();
     static void ClearLog();
     static void AppendLog(QString logText);
     static void StopX();
     static void StartX();
-    static QString CatThat(QString fileName);
+
     static void Reboot();
     static void CopyConfig();
     static void RevertConfig();

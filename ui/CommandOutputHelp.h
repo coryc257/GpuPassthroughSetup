@@ -19,6 +19,8 @@ public:
     ~CommandOutputHelp() override;
 
     QString getSelection();
+    void setDetails(QString output, QString helpText);
+    void setDefault(QString defaultValue);
 
 private:
     QScopedPointer<Ui::CommandOutputHelp> m_ui;

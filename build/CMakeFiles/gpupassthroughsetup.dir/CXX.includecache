@@ -6,22 +6,6 @@
 
 #IncludeRegexTransform: 
 
-/home/el/projects/GpuPassthroughSetup/src/daemonize.h
-
-/home/el/projects/GpuPassthroughSetup/src/exec_container.cpp
-exec_container.h
-/home/el/projects/GpuPassthroughSetup/src/exec_container.h
-QTextCodec
--
-QStandardPaths
--
-QDir
--
-QThread
--
-daemonize.h
-/home/el/projects/GpuPassthroughSetup/src/daemonize.h
-
 /home/el/projects/GpuPassthroughSetup/src/exec_container.h
 QString
 -
@@ -49,10 +33,16 @@ QSignalMapper
 -
 QMessageBox
 -
+QFile
+-
+QFileDialog
+-
 ../src/exec_container.h
 /home/el/projects/GpuPassthroughSetup/src/exec_container.h
 CommandOutputHelp.h
 /home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.h
+XEdit.h
+/home/el/projects/GpuPassthroughSetup/ui/XEdit.h
 
 /home/el/projects/GpuPassthroughSetup/ui/Main.h
 QMainWindow
@@ -64,9 +54,19 @@ QAction
 QResizeEvent
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QDir
-qdir.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qdir.h
+/home/el/projects/GpuPassthroughSetup/ui/XEdit.h
+QDialog
+-
+QScopedPointer
+-
+QAction
+-
+QResizeEvent
+-
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
+qfile.h
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
 qprocess.h
@@ -80,10 +80,6 @@ qscopedpointer.h
 qsignalmapper.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qsignalmapper.h
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QStandardPaths
-qstandardpaths.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstandardpaths.h
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 qstring.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h
@@ -91,14 +87,6 @@ qstring.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
 qstringlist.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringlist.h
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QTextCodec
-qtextcodec.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qtextcodec.h
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QThread
-qthread.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qthread.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QVariant
 qvariant.h
@@ -232,20 +220,6 @@ QtCore/qiodevice.h
 QtCore/qpair.h
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qdeadlinetimer.h
-QtCore/qelapsedtimer.h
--
-QtCore/qmetatype.h
--
-QtCore/qnamespace.h
--
-QtCore/qpair.h
--
-limits
--
-chrono
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h
 QtCore/qalgorithms.h
 -
@@ -286,10 +260,6 @@ QtCore/qfileinfo.h
 QtCore/qstringlist.h
 -
 QtCore/qshareddata.h
--
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h
-QtCore/qglobal.h
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qeventloop.h
@@ -680,12 +650,6 @@ QtCore/qnamespace.h
 QtCore/qmargins.h
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstandardpaths.h
-QtCore/qstringlist.h
--
-QtCore/qobjectdefs.h
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h
 QtCore/qchar.h
 -
@@ -774,12 +738,6 @@ AvailabilityMacros.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtcore-config.h
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qtextcodec.h
-QtCore/qstring.h
--
-QtCore/qlist.h
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h
 QtCore/qiodevice.h
 -
@@ -792,16 +750,6 @@ QtCore/qlocale.h
 QtCore/qscopedpointer.h
 -
 stdio.h
--
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qthread.h
-QtCore/qobject.h
--
-QtCore/qdeadlinetimer.h
--
-future
--
-functional
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtypeinfo.h
@@ -1288,6 +1236,10 @@ qapplication.h
 qdialog.h
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h
 
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFileDialog
+qfiledialog.h
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qfiledialog.h
+
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel
 qlabel.h
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qlabel.h
@@ -1390,6 +1342,20 @@ QtWidgets/qwidget.h
 QtWidgets/qtwidgetsglobal.h
 -
 QtWidgets/qwidget.h
+-
+
+/usr/include/x86_64-linux-gnu/qt5/QtWidgets/qfiledialog.h
+QtWidgets/qtwidgetsglobal.h
+-
+QtCore/qdir.h
+-
+QtCore/qstring.h
+-
+QtCore/qurl.h
+-
+QtWidgets/qdialog.h
+-
+functional
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qframe.h

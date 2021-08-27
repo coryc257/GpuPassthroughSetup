@@ -79,6 +79,32 @@
         copy_command.Run();
     }
 
+    void Operations::SaveVmXConfig(QString xConfig)
+    {
+        BashCommand(QStringLiteral("printf \"%s\" \"")+xConfig.replace(QStringLiteral("\""),QStringLiteral("\\\""))+QStringLiteral("\" > /root/.gpu_passthrough/vm_config.conf"));
+        //BashCommand(QStringLiteral("printf \"%s\" \"")+xConfig.replace(QStringLiteral("\""),QStringLiteral("\\\""))+QStringLiteral("\" > ~/vm_config.conf"));
+    }
+
+    void Operations::SetQEmuCommandLine(QString vmName)
+    {
+        QProcess virshTerm;
+        virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
+
+    }
+
+
+    void Operations::SetVmXConfig(QString xConfigFile)
+    {
+        ExecContainer copy_command = ExecContainer(
+                QStringLiteral("cp"),
+                QStringList({
+                    xConfigFile,
+                    CONFIG_FOLDER + QStringLiteral("/vm_config.conf")
+                }));
+        copy_command.Run();
+    }
+
+
     void Operations::SetVMName(QString vmName)
     {
         ExecContainer meow = ExecContainer(

@@ -363,6 +363,33 @@ ui/Main.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.s
 .PHONY : ui/Main.cpp.s
 
+ui/XEdit.o: ui/XEdit.cpp.o
+
+.PHONY : ui/XEdit.o
+
+# target to build an object file
+ui/XEdit.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o
+.PHONY : ui/XEdit.cpp.o
+
+ui/XEdit.i: ui/XEdit.cpp.i
+
+.PHONY : ui/XEdit.i
+
+# target to preprocess a source file
+ui/XEdit.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.i
+.PHONY : ui/XEdit.cpp.i
+
+ui/XEdit.s: ui/XEdit.cpp.s
+
+.PHONY : ui/XEdit.s
+
+# target to generate assembly for a file
+ui/XEdit.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.s
+.PHONY : ui/XEdit.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -395,6 +422,9 @@ help:
 	@echo "... ui/Main.o"
 	@echo "... ui/Main.i"
 	@echo "... ui/Main.s"
+	@echo "... ui/XEdit.o"
+	@echo "... ui/XEdit.i"
+	@echo "... ui/XEdit.s"
 .PHONY : help
 
 

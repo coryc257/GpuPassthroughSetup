@@ -8,6 +8,7 @@ file(REMOVE_RECURSE
   "CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o"
   "CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o"
   "CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o"
+  "CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o"
   "gpupassthroughsetup"
   "gpupassthroughsetup.pdb"
 )

@@ -266,10 +266,10 @@
         </rect>
        </property>
        <property name="text">
-        <string>Help Find</string>
+        <string>Edit Current</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnVMXConfigSave">
+      <widget class="QPushButton" name="btnVMXConfigPick">
        <property name="geometry">
         <rect>
          <x>600</x>
@@ -279,7 +279,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Save</string>
+        <string>Pick</string>
        </property>
       </widget>
      </widget>
@@ -328,7 +328,7 @@
         <string>Help Find</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnNormalXConfigSave">
+      <widget class="QPushButton" name="btnNormalXConfigPick">
        <property name="geometry">
         <rect>
          <x>600</x>

@@ -18,6 +18,7 @@ set(gpupassthroughsetup_SRC
   src/exec_container.cpp
   ui/Main.cpp
   ui/CommandOutputHelp.cpp
+  ui/XEdit.cpp
 )
 
 # Tell CMake to create the helloworld executable

@@ -26,6 +26,8 @@ private:
     int originalHeight;
     int scrollerOriginalHeight;
 
+
+
 private slots:
     void CloseMe();
     void Help();
@@ -33,9 +35,26 @@ private slots:
 
     // Finders
     void finderVmName();
+    void finderUsername();
+    void finderVmXConfig();
+    void finderNormalXConfig();
+    void finderEvDevKeyboard();
+    void finderPassthroughMouse();
 
     // Savers
     void saveVmName();
+    void saveUsername();
+    void saveEvDevKeyboard();
+    void savePassthroughMouse();
+
+    // Pickers
+    void saveVmXConfigChooser();
+    void saveNormalXConfigChooser();
+
+
+
+
+
 
 };
 

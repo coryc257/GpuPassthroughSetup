@@ -98,6 +98,11 @@
 			"/home/el/projects/GpuPassthroughSetup/ui/Main.h",
 			"MU",
 			"UYX5XTB5RZ/moc_Main.cpp"
+		],
+		[
+			"/home/el/projects/GpuPassthroughSetup/ui/XEdit.h",
+			"MU",
+			"UYX5XTB5RZ/moc_XEdit.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -159,7 +164,8 @@
 			"/home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.cpp",
 			"MU"
 		],
-		[ "/home/el/projects/GpuPassthroughSetup/ui/Main.cpp", "MU" ]
+		[ "/home/el/projects/GpuPassthroughSetup/ui/Main.cpp", "MU" ],
+		[ "/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp", "MU" ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

@@ -355,11 +355,45 @@
         return retVal;
     }
 
+    static QString __generation_cpu_tune(QList<CPU_CORE> assignedCores, QList<int> emulatorPin)
+    {
+        QString retVal;
+        int currentCore = 0;
+
+        retVal.reserve(4096);
+
+        retVal.append(QStringLiteral("  <vcpu placement='static'>")+QString::number(assignedCores.count())+QStringLiteral("</vcpu>\n"));
+        retVal.append(QStringLiteral("  <cpu mode='host-passthrough' check='none' migratable='on'>\n"));
+        retVal.append(QStringLiteral("    <topology sockets='1' dies='1' cores='")+QString::number(assignedCores.count()/2)+QStringLiteral("' threads='2'/>\n"));
+        retVal.append(QStringLiteral("  </cpu>\n"));
+        retVal.append(QStringLiteral("  <cputune>\n"));
+        Q_FOREACH(CPU_CORE core, assignedCores) {
+            retVal.append(QStringLiteral("    <vcpupin vcpu='")+QString::number(currentCore)+QStringLiteral("' cpuset='")+core.CPU+QStringLiteral("'/>\n"));
+            currentCore++;
+        }
+        retVal.append(QStringLiteral("    <emulatorpin cpuset='"));
+        for (int j = 0; j < emulatorPin.count(); j++) {
+            retVal.append(QString::number(emulatorPin[j]));
+            if (j + 1 != emulatorPin.count()) {
+                retVal.append(QStringLiteral(","));
+            }
+        }
+        retVal.append(QStringLiteral("'/>\n"));
+        retVal.append(QStringLiteral("  </cputune>\n"));
+
+
+
+        return retVal;
+    }
+
     void Operations::SaveRamCpu(QString ramGB, QString cpuCores, QString vmName)
     {
         BashCommandResult cpuRes;
         QList<CPU_CORE> cpuInfo = __GetCpuInfo();
-        QMap<QString, int> l3Groups;
+        QMap<int, int> l3Groups;
+        QMap<int, QList<CPU_CORE>> l1Groups;
+        QList<CPU_CORE> assignedCores;
+        QList<int> emulatorPin;
 
         int ram = ramGB.split(QStringLiteral(" "))[0].toInt();
         int cores = cpuCores.split(QStringLiteral(" "))[0].toInt();
@@ -368,28 +402,72 @@
 
 
         Q_FOREACH(CPU_CORE core, cpuInfo) {
-            if (!l3Groups.contains(core.L3)) {
-                l3Groups[core.L3] = 1;
+            int l1 = core.L1d.toInt();
+            int l3 = core.L3.toInt();
+
+            if (!l3Groups.contains(l3)) {
+                l3Groups[l3] = 1;
             } else {
-                l3Groups[core.L3] += 1;
+                l3Groups[l3] += 1;
             }
+
+            if (!l1Groups.contains(l1)) {
+                l1Groups[l1] = QList<CPU_CORE>();
+            }
+            l1Groups[l1].append(core);
         }
 
         if (l3Groups.count() > 1) { // FORCE A SPLIT on the L3 Cache
-            if (cores != l3Groups[l3Groups.keys()[1]]) {
-                QString sv = QString::number(l3Groups[l3Groups.keys()[1]]);
+            if (cores != l3Groups[1]) {
+                QString sv = QString::number(l3Groups[1]);
                 MsgBox(QStringLiteral("You must assign a number of cores equal to an L3 cache boundary(") + sv + QStringLiteral(")"));
                 return;
             }
+
         } else { // DO WHAT TOLD
             // TODO
+            if (cores % 2 != 0) {
+                MsgBox(QStringLiteral("You must ask for an even number of cores"));
+            }
+            int groupCount = l1Groups.count();
+
             // Start with odds
+            for (int j = 1; j < groupCount; j += 2) {
+                Q_FOREACH(CPU_CORE core, l1Groups[l1Groups.keys()[j]]) {
+                    assignedCores.append(core);
+                }
+                if (assignedCores.count() == cores)
+                    goto got_cores;
+            }
 
             // Work backwards
-
             // Make sure we have at least two cores to pin to the emulator
+            for (int j = (groupCount % 2 == 0) ? groupCount - 2 : groupCount - 1; j > 0; j -= 2) {
+                Q_FOREACH(CPU_CORE core, l1Groups[l1Groups.keys()[j]]) {
+                    assignedCores.append(core);
+                }
+                if (assignedCores.count() == cores)
+                    goto got_cores;
+            }
+
+            if (assignedCores.count() != cores) {
+                MsgBox(QStringLiteral("You don't have enough cores"));
+            }
         }
 
+        got_cores:
+
+            Q_FOREACH(CPU_CORE core, l1Groups[0]) {
+                emulatorPin.append(core.CPU.toInt());
+            }
+
+            QString vmConfig = __generation_cpu_tune(assignedCores, emulatorPin);
+            QProcess virshTerm;
+            virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
+
+            MsgBox(QStringLiteral("Replace the cputune, cpu and vcpu sections of your config with:\n\n")+vmConfig);
+
+            return;
     }
 
 

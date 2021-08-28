@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>756</width>
-    <height>575</height>
+    <height>639</height>
    </rect>
   </property>
   <property name="minimumSize">
@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>GpuPassthroughSetup</string>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::Rounded</enum>
@@ -48,9 +48,9 @@
    <widget class="QPushButton" name="btnGo">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>10</x>
       <y>10</y>
-      <width>541</width>
+      <width>531</width>
       <height>71</height>
      </rect>
     </property>
@@ -61,10 +61,10 @@
    <widget class="QScrollArea" name="scrollArea">
     <property name="geometry">
      <rect>
-      <x>0</x>
+      <x>3</x>
       <y>90</y>
       <width>751</width>
-      <height>451</height>
+      <height>511</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -103,7 +103,7 @@
        <x>0</x>
        <y>0</y>
        <width>726</width>
-       <height>447</height>
+       <height>500</height>
       </rect>
      </property>
      <widget class="QWidget" name="widget" native="true">
@@ -168,8 +168,8 @@
      <widget class="QWidget" name="widget_7" native="true">
       <property name="geometry">
        <rect>
-        <x>-170</x>
-        <y>450</y>
+        <x>20</x>
+        <y>430</y>
         <width>711</width>
         <height>71</height>
        </rect>
@@ -242,6 +242,9 @@
          <height>36</height>
         </rect>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QLabel" name="lblVMXConfig">
        <property name="geometry">
@@ -301,6 +304,9 @@
          <height>36</height>
         </rect>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
       <widget class="QLabel" name="lblNormalXConfig">
        <property name="geometry">
@@ -325,7 +331,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Help Find</string>
+        <string>Edit Current</string>
        </property>
       </widget>
       <widget class="QPushButton" name="btnNormalXConfigPick">
@@ -338,7 +344,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Save</string>
+        <string>Pick</string>
        </property>
       </widget>
      </widget>
@@ -387,7 +393,7 @@
         <string>Help Find</string>
        </property>
       </widget>
-      <widget class="QPushButton" name="btnEvDevKeyboardSave">
+      <widget class="QPushButton" name="btnEvDevKeyboardEdit">
        <property name="geometry">
         <rect>
          <x>600</x>
@@ -397,7 +403,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>Save</string>
+        <string>Edit</string>
        </property>
       </widget>
      </widget>

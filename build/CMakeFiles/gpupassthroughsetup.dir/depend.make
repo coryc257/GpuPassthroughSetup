@@ -129,6 +129,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: ../src/daemonize.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: ../src/exec_container.cpp
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: ../src/exec_container.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QDir
+CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStandardPaths
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString

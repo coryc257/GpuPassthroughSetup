@@ -292,6 +292,9 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "/usr/share/cmake-3.18/Modules/CMakeParseArguments.cmake"
+		},
+		{
+			"path" : "scripts/find_groups.sh"
 		}
 	],
 	"kind" : "cmakeFiles",

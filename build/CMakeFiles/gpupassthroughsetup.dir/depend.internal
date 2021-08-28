@@ -130,6 +130,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o
  /home/el/projects/GpuPassthroughSetup/src/exec_container.cpp
  /home/el/projects/GpuPassthroughSetup/src/exec_container.h
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QDir
+ /usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QStandardPaths
  /usr/include/x86_64-linux-gnu/qt5/QtCore/QString

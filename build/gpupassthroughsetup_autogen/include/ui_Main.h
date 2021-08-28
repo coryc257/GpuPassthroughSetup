@@ -58,7 +58,7 @@ public:
     QLineEdit *txtEvDevKeyboard;
     QLabel *lblEvDevKeyboard;
     QPushButton *btnEvDevKeyboardFind;
-    QPushButton *btnEvDevKeyboardSave;
+    QPushButton *btnEvDevKeyboardEdit;
     QWidget *widget_6;
     QLineEdit *txtPassthroughMouse;
     QLabel *lblPassthroughMouse;
@@ -77,7 +77,7 @@ public:
     {
         if (Main->objectName().isEmpty())
             Main->setObjectName(QString::fromUtf8("Main"));
-        Main->resize(756, 575);
+        Main->resize(756, 639);
         Main->setMinimumSize(QSize(756, 0));
         Main->setMaximumSize(QSize(756, 16777215));
         Main->setTabShape(QTabWidget::Rounded);
@@ -95,10 +95,10 @@ public:
         btnMouseToggle->setGeometry(QRect(550, 10, 201, 71));
         btnGo = new QPushButton(centralwidget);
         btnGo->setObjectName(QString::fromUtf8("btnGo"));
-        btnGo->setGeometry(QRect(0, 10, 541, 71));
+        btnGo->setGeometry(QRect(10, 10, 531, 71));
         scrollArea = new QScrollArea(centralwidget);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
-        scrollArea->setGeometry(QRect(0, 90, 751, 451));
+        scrollArea->setGeometry(QRect(3, 90, 751, 511));
         QSizePolicy sizePolicy(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
@@ -112,7 +112,7 @@ public:
         scrollArea->setAlignment(Qt::AlignHCenter|Qt::AlignTop);
         scrollAreaWidgetContents = new QWidget();
         scrollAreaWidgetContents->setObjectName(QString::fromUtf8("scrollAreaWidgetContents"));
-        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 726, 447));
+        scrollAreaWidgetContents->setGeometry(QRect(0, 0, 726, 500));
         widget = new QWidget(scrollAreaWidgetContents);
         widget->setObjectName(QString::fromUtf8("widget"));
         widget->setGeometry(QRect(20, 10, 711, 71));
@@ -130,7 +130,7 @@ public:
         btnVmNameSave->setGeometry(QRect(600, 30, 99, 38));
         widget_7 = new QWidget(scrollAreaWidgetContents);
         widget_7->setObjectName(QString::fromUtf8("widget_7"));
-        widget_7->setGeometry(QRect(-170, 450, 711, 71));
+        widget_7->setGeometry(QRect(20, 430, 711, 71));
         txtIOMMUGroup = new QLineEdit(widget_7);
         txtIOMMUGroup->setObjectName(QString::fromUtf8("txtIOMMUGroup"));
         txtIOMMUGroup->setGeometry(QRect(10, 30, 481, 36));
@@ -149,6 +149,7 @@ public:
         txtVmXConfig = new QLineEdit(widget_3);
         txtVmXConfig->setObjectName(QString::fromUtf8("txtVmXConfig"));
         txtVmXConfig->setGeometry(QRect(10, 30, 481, 36));
+        txtVmXConfig->setReadOnly(true);
         lblVMXConfig = new QLabel(widget_3);
         lblVMXConfig->setObjectName(QString::fromUtf8("lblVMXConfig"));
         lblVMXConfig->setGeometry(QRect(10, 10, 141, 22));
@@ -164,6 +165,7 @@ public:
         txtNormalXConfig = new QLineEdit(widget_4);
         txtNormalXConfig->setObjectName(QString::fromUtf8("txtNormalXConfig"));
         txtNormalXConfig->setGeometry(QRect(10, 30, 481, 36));
+        txtNormalXConfig->setReadOnly(true);
         lblNormalXConfig = new QLabel(widget_4);
         lblNormalXConfig->setObjectName(QString::fromUtf8("lblNormalXConfig"));
         lblNormalXConfig->setGeometry(QRect(10, 10, 141, 22));
@@ -185,9 +187,9 @@ public:
         btnEvDevKeyboardFind = new QPushButton(widget_5);
         btnEvDevKeyboardFind->setObjectName(QString::fromUtf8("btnEvDevKeyboardFind"));
         btnEvDevKeyboardFind->setGeometry(QRect(500, 30, 99, 38));
-        btnEvDevKeyboardSave = new QPushButton(widget_5);
-        btnEvDevKeyboardSave->setObjectName(QString::fromUtf8("btnEvDevKeyboardSave"));
-        btnEvDevKeyboardSave->setGeometry(QRect(600, 30, 99, 38));
+        btnEvDevKeyboardEdit = new QPushButton(widget_5);
+        btnEvDevKeyboardEdit->setObjectName(QString::fromUtf8("btnEvDevKeyboardEdit"));
+        btnEvDevKeyboardEdit->setGeometry(QRect(600, 30, 99, 38));
         widget_6 = new QWidget(scrollAreaWidgetContents);
         widget_6->setObjectName(QString::fromUtf8("widget_6"));
         widget_6->setGeometry(QRect(20, 360, 711, 71));
@@ -243,7 +245,7 @@ public:
 
     void retranslateUi(QMainWindow *Main)
     {
-        Main->setWindowTitle(QCoreApplication::translate("Main", "MainWindow", nullptr));
+        Main->setWindowTitle(QCoreApplication::translate("Main", "GpuPassthroughSetup", nullptr));
         actionExit->setText(QCoreApplication::translate("Main", "Exit", nullptr));
         actionHelp->setText(QCoreApplication::translate("Main", "Help", nullptr));
         actionReload->setText(QCoreApplication::translate("Main", "Reload", nullptr));
@@ -259,11 +261,11 @@ public:
         btnVmXConfigFind->setText(QCoreApplication::translate("Main", "Edit Current", nullptr));
         btnVMXConfigPick->setText(QCoreApplication::translate("Main", "Pick", nullptr));
         lblNormalXConfig->setText(QCoreApplication::translate("Main", "Normal X Config", nullptr));
-        btnNormalXConfigFind->setText(QCoreApplication::translate("Main", "Help Find", nullptr));
-        btnNormalXConfigPick->setText(QCoreApplication::translate("Main", "Save", nullptr));
+        btnNormalXConfigFind->setText(QCoreApplication::translate("Main", "Edit Current", nullptr));
+        btnNormalXConfigPick->setText(QCoreApplication::translate("Main", "Pick", nullptr));
         lblEvDevKeyboard->setText(QCoreApplication::translate("Main", "EvDev Keyboard", nullptr));
         btnEvDevKeyboardFind->setText(QCoreApplication::translate("Main", "Help Find", nullptr));
-        btnEvDevKeyboardSave->setText(QCoreApplication::translate("Main", "Save", nullptr));
+        btnEvDevKeyboardEdit->setText(QCoreApplication::translate("Main", "Edit", nullptr));
         lblPassthroughMouse->setText(QCoreApplication::translate("Main", "Passthrough Mouse", nullptr));
         btnPassthroughMouseFind->setText(QCoreApplication::translate("Main", "Help Find", nullptr));
         btnPassthroughMouseSave->setText(QCoreApplication::translate("Main", "Save", nullptr));

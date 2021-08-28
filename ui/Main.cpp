@@ -31,6 +31,11 @@ Main::Main(QWidget* parent) :
     Operations::Init();
 
     m_ui->txtVmName->setText(Operations::vmName);
+    m_ui->txtVmXConfig->setText(Operations::vmConfig);
+    m_ui->txtNormalXConfig->setText(Operations::normalConfig);
+    m_ui->txtEvDevKeyboard->setText(Operations::evDevKeyboard);
+    m_ui->txtPassthroughMouse->setText(Operations::passthroughMouse);
+    m_ui->txtUsername->setText(Operations::userName);
 
     connect(m_ui->actionExit, SIGNAL(triggered()), this, SLOT(CloseMe()));
     connect(m_ui->actionHelp, SIGNAL(triggered()), this, SLOT(Help()));
@@ -40,6 +45,14 @@ Main::Main(QWidget* parent) :
     connect(m_ui->btnVmXConfigFind, SIGNAL(clicked()), this, SLOT(finderVmXConfig()));
     connect(m_ui->btnVMXConfigPick, SIGNAL(clicked()), this, SLOT(saveVmXConfigChooser()));
     connect(m_ui->btnEvDevKeyboardFind, SIGNAL(clicked()), this, SLOT(finderEvDevKeyboard()));
+    connect(m_ui->btnPassthroughMouseFind, SIGNAL(clicked()), this, SLOT(finderPassthroughMouse()));
+    connect(m_ui->btnPassthroughMouseSave, SIGNAL(clicked()), this, SLOT(savePassthroughMouse()));
+    connect(m_ui->btnUsernameSave, SIGNAL(clicked()), this, SLOT(saveUsername()));
+    connect(m_ui->btnUsernameFind, SIGNAL(clicked()), this, SLOT(finderUserName()));
+    connect(m_ui->btnEvDevKeyboardEdit, SIGNAL(clicked()), this, SLOT(finderEvDevKeyboard()));
+    connect(m_ui->btnNormalXConfigFind, SIGNAL(clicked()), this, SLOT(finderNormalXConfig()));
+    connect(m_ui->btnNormalXConfigPick, SIGNAL(clicked()), this, SLOT(saveNormalXConfigChooser()));\
+    connect(m_ui->btnIOMMUGroupFind, SIGNAL(clicked()), this, SLOT(findIOMMU()));
 }
 
 void Main::Go()
@@ -90,9 +103,9 @@ void Main::finderVmName()
     }
 }
 
-void Main::finderUsername()
+void Main::finderUserName()
 {
-
+    MsgBox(QStringLiteral("The user you log into that isnt root"));
 }
 
 void Main::finderVmXConfig()
@@ -117,7 +130,22 @@ void Main::finderVmXConfig()
 
 void Main::finderNormalXConfig()
 {
+    QString xConfig;
 
+    if (QFile::exists(QStringLiteral("/root/.gpu_passthrough/non_vm_config.conf"))) {
+        xConfig = Operations::CatThat(QStringLiteral("/root/.gpu_passthrough/non_vm_config.conf"));
+    } else {
+        xConfig = Operations::CatThat(QStringLiteral("/etc/X11/xorg.conf"));
+    }
+
+    //= Operations::CatThat(QStringLiteral("/etc/X11/xorg.conf"));
+    XEdit edit;
+    edit.setDetails(xConfig, QStringLiteral("Set up your XConfig how you want it then come back here and click ok or edit it right here right now"));
+    edit.exec();
+    if (edit.result() == QDialog::DialogCode::Accepted) {
+        Operations::SaveNonVmXConfig(edit.getXConfig());
+        //Operations::SaveVmXConfig(xConfig);
+    }
 }
 
 void Main::finderEvDevKeyboard()
@@ -128,15 +156,35 @@ void Main::finderEvDevKeyboard()
     helper.setDefault(QStringLiteral("/dev/input/event"));
     helper.exec();
     if (helper.result() == QDialog::DialogCode::Accepted){
-        QString qEmuCommandLineXml = QStringLiteral("<qemu:commandline>\n\t<qemu:arg value='-object'/>\n\t<qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/event")+helper.getSelection()+QStringLiteral(",grab_all=on,repeat=on'/>\n</qemu:commandline>");
-        Operations::SetQEmuCommandLine(m_ui->txtVmName->text());
-        MsgBox(QStringLiteral("Place this under </devices> before </domain>... Middle click to paste\n\n")+qEmuCommandLineXml);
+        this->m_ui->txtEvDevKeyboard->setText(helper.getSelection());
+        this->saveEvDevKeyboard();
     }
 }
 
 void Main::finderPassthroughMouse()
 {
+    CommandOutputHelp helper;
+    BashCommandResult res = Operations::BashCommand((QStringLiteral("lsusb")));
+    if (res.Success) {
+        helper.setDetails(res.Output, QStringLiteral("Find your mouse and paste in xxxx:xxxx"));
+        helper.exec();
+        if (helper.result() == QDialog::DialogCode::Accepted) {
+            m_ui->txtPassthroughMouse->setText(helper.getSelection());
+        }
+    }
+}
 
+void Main::findIOMMU()
+{
+    CommandOutputHelp helper;
+    BashCommandResult res = Operations::BashCommand(QStringLiteral("./find_groups.sh"));
+    if (res.Success) {
+        helper.setDetails(res.Output, QStringLiteral("Find you IOMMU Group and paste in 'IOMMU GROUP <#>'"));
+        helper.exec();
+        if (helper.result() == QDialog::DialogCode::Accepted) {
+            m_ui->txtIOMMUGroup->setText(helper.getSelection());
+        }
+    }
 }
 
 
@@ -163,18 +211,25 @@ void Main::saveVmXConfigChooser()
 
 void Main::saveNormalXConfigChooser()
 {
+    QFileDialog diag;
+    diag.exec();
 
+    if (diag.result() == QFileDialog::DialogCode::Accepted) {
+        Operations::SetNonVmXConfig(diag.selectedFiles()[0]);
+    }
 }
 
 void Main::saveEvDevKeyboard()
 {
-
+    QString qEmuCommandLineXml = QStringLiteral("<qemu:commandline>\n\t<qemu:arg value='-object'/>\n\t<qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/event")+m_ui->txtEvDevKeyboard->text()+QStringLiteral(",grab_all=on,repeat=on'/>\n</qemu:commandline>");
+    Operations::SetQEmuCommandLine(m_ui->txtVmName->text(), m_ui->txtEvDevKeyboard->text());
+    MsgBox(QStringLiteral("Place this under </devices> before </domain>... Middle click to paste\n\n")+qEmuCommandLineXml);
 }
 
 
 void Main::savePassthroughMouse()
 {
-
+    Operations::SavePassthroughMouse(m_ui->txtPassthroughMouse->text());
 }
 
 

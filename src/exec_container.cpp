@@ -3,6 +3,7 @@
 #include <QStandardPaths>
 #include <QDir>
 #include <QThread>
+#include <QFile>
 #include "daemonize.h"
 #define CONFIG_FOLDER QStandardPaths::standardLocations(QStandardPaths::StandardLocation::HomeLocation)[0] + QStringLiteral("/.gpu_passthrough")
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -45,6 +46,8 @@
     QString Operations::normalConfig;
     QStringList Operations::deviceList;
     QStringList Operations::detachedDeviceList;
+    QString Operations::evDevKeyboard;
+    QString Operations::passthroughMouse;
     int Operations::pointOfFailure = 0;
     bool Operations::debugOnly = false;
     bool Operations::reloadNvidia = false;
@@ -85,12 +88,40 @@
         //BashCommand(QStringLiteral("printf \"%s\" \"")+xConfig.replace(QStringLiteral("\""),QStringLiteral("\\\""))+QStringLiteral("\" > ~/vm_config.conf"));
     }
 
-    void Operations::SetQEmuCommandLine(QString vmName)
+    void Operations::SaveNonVmXConfig(QString xConfig)
     {
+        BashCommand(QStringLiteral("printf \"%s\" \"")+xConfig.replace(QStringLiteral("\""),QStringLiteral("\\\""))+QStringLiteral("\" > /root/.gpu_passthrough/non_vm_config.conf"));
+        //BashCommand(QStringLiteral("printf \"%s\" \"")+xConfig.replace(QStringLiteral("\""),QStringLiteral("\\\""))+QStringLiteral("\" > ~/vm_config.conf"));
+    }
+
+    void Operations::SetQEmuCommandLine(QString vmName, QString device)
+    {
+
+        BashCommand(QStringLiteral("printf \"%s\" \"")+device+QStringLiteral("\" > ") + CONFIG_FOLDER + QStringLiteral("/keyboard.param"));
         QProcess virshTerm;
         virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
 
     }
+
+    void Operations::SavePassthroughMouse(QString mouseIdentity)
+    {
+        QStringList mParts = mouseIdentity.trimmed().split(QStringLiteral(":"));
+        if (mParts.count() == 2) {
+            QString mouseToggleXML =    QStringLiteral("#")+mouseIdentity+QStringLiteral("\n")+
+                                        QStringLiteral("#FirstLineMustbe xxxx:xxxx\n<hostdev mode='subsystem' type='usb' managed='no'>\n\t<source>\n\t\t<vendor id='0x") +
+                                        mParts[0].replace(QStringLiteral("'"), QStringLiteral("\\'")) +
+                                        QStringLiteral("' />\n\t\t<product id='0x") +
+                                        mParts[1].replace(QStringLiteral("'"), QStringLiteral("\\'")) +
+                                        QStringLiteral("' />\n\t</source>\n</hostdev>");
+            BashCommand(
+                    QStringLiteral("printf \"%s\" \"") + mouseToggleXML.replace(QStringLiteral("\""), QStringLiteral("\\\"")) + QStringLiteral("\" > /root/.gpu_passthrough/toggle_mouse.xml")
+            );
+            BashCommand(
+                    QStringLiteral("printf \"%s\" \"") + mouseIdentity.replace(QStringLiteral("\""), QStringLiteral("\\\"")) + QStringLiteral("\" > /root/.gpu_passthrough/mouse.param")
+            );
+        }
+    }
+
 
 
     void Operations::SetVmXConfig(QString xConfigFile)
@@ -100,6 +131,17 @@
                 QStringList({
                     xConfigFile,
                     CONFIG_FOLDER + QStringLiteral("/vm_config.conf")
+                }));
+        copy_command.Run();
+    }
+
+    void Operations::SetNonVmXConfig(QString xConfigFile)
+    {
+        ExecContainer copy_command = ExecContainer(
+                QStringLiteral("cp"),
+                QStringList({
+                    xConfigFile,
+                    CONFIG_FOLDER + QStringLiteral("/non_vm_config.conf")
                 }));
         copy_command.Run();
     }
@@ -204,8 +246,7 @@
         if(command.Run()) {
             return command.GetOutputString();
         } else {
-            Operations::Reboot();
-            return QStringLiteral("lol");
+            return QStringLiteral("");
         }
     }
 
@@ -346,8 +387,22 @@
         Operations::vmName =     Operations::CatThat(
                                         CONFIG_FOLDER + QStringLiteral("/vm_name.param")
                                     );
-        Operations::vmConfig = CONFIG_FOLDER + QStringLiteral("/vm_config.conf");
-        Operations::normalConfig = CONFIG_FOLDER + QStringLiteral("/non_vm_config.conf");
+
+        Operations::evDevKeyboard = Operations::CatThat(
+                                        CONFIG_FOLDER + QStringLiteral("/keyboard.param")
+                                    );
+        Operations::passthroughMouse = Operations::CatThat(
+                                        CONFIG_FOLDER + QStringLiteral("/mouse.param")
+                                    );
+
+
+        if (QFile::exists(CONFIG_FOLDER + QStringLiteral("/vm_config.conf"))) {
+            Operations::vmConfig = CONFIG_FOLDER + QStringLiteral("/vm_config.conf");
+        }
+
+        if (QFile::exists(CONFIG_FOLDER + QStringLiteral("/non_vm_config.conf"))) {
+            Operations::normalConfig = CONFIG_FOLDER + QStringLiteral("/non_vm_config.conf");
+        }
 
         Operations::deviceList.append(QStringLiteral("pci_0000_01_00_0"));
         Operations::deviceList.append(QStringLiteral("pci_0000_01_00_1"));

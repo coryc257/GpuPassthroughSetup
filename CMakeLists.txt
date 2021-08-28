@@ -27,5 +27,11 @@ add_executable(gpupassthroughsetup ${gpupassthroughsetup_SRC})
 # Use the Widgets module from Qt 5.
 target_link_libraries(gpupassthroughsetup Qt5::Widgets)
 
+configure_file(scripts/find_groups.sh find_groups.sh COPYONLY)
+add_custom_command(
+    TARGET gpupassthroughsetup POST_BUILD
+    COMMAND chmod +x ${CMAKE_CURRENT_BINARY_DIR}/find_groups.sh
+)
+
 # Install the executable
 install(TARGETS gpupassthroughsetup DESTINATION bin)

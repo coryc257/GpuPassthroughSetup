@@ -42,6 +42,7 @@ public:
         txtCommandOutput->setObjectName(QString::fromUtf8("txtCommandOutput"));
         txtCommandOutput->setGeometry(QRect(23, 60, 711, 241));
         txtCommandOutput->setSizeAdjustPolicy(QAbstractScrollArea::AdjustToContents);
+        txtCommandOutput->setLineWrapMode(QTextEdit::NoWrap);
         txtCommandOutput->setReadOnly(true);
         txtSelection = new QLineEdit(CommandOutputHelp);
         txtSelection->setObjectName(QString::fromUtf8("txtSelection"));

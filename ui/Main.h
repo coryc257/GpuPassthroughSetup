@@ -35,11 +35,12 @@ private slots:
 
     // Finders
     void finderVmName();
-    void finderUsername();
+    void finderUserName();
     void finderVmXConfig();
     void finderNormalXConfig();
     void finderEvDevKeyboard();
     void finderPassthroughMouse();
+    void findIOMMU();
 
     // Savers
     void saveVmName();

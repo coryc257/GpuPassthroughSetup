@@ -34,18 +34,23 @@ class Operations
 public:
     static void Init();
     static void SaveNonVmXConfig();
+    static void SaveNonVmXConfig(QString xConfig);
     static void SaveVmXConfig();
     static void SaveVmXConfig(QString xConfig);
     static void SetVmXConfig(QString xConfigFile);
-    static void SetQEmuCommandLine(QString vmName);
+    static void SetNonVmXConfig(QString xConfigFile);
+    static void SetQEmuCommandLine(QString vmName, QString device);
     static void SetVMName(QString vmName);
     static void SetUser(QString userName);
+    static void SavePassthroughMouse(QString mouseIdentity);
     static void GO();
 
     static QString vmName;
     static QString userName;
     static QString vmConfig;
     static QString normalConfig;
+    static QString evDevKeyboard;
+    static QString passthroughMouse;
     static QStringList deviceList;
     static QStringList detachedDeviceList;
 

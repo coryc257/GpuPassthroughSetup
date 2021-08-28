@@ -390,6 +390,33 @@ ui/XEdit.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.s
 .PHONY : ui/XEdit.cpp.s
 
+util/MsgBox.o: util/MsgBox.cpp.o
+
+.PHONY : util/MsgBox.o
+
+# target to build an object file
+util/MsgBox.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o
+.PHONY : util/MsgBox.cpp.o
+
+util/MsgBox.i: util/MsgBox.cpp.i
+
+.PHONY : util/MsgBox.i
+
+# target to preprocess a source file
+util/MsgBox.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.i
+.PHONY : util/MsgBox.cpp.i
+
+util/MsgBox.s: util/MsgBox.cpp.s
+
+.PHONY : util/MsgBox.s
+
+# target to generate assembly for a file
+util/MsgBox.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.s
+.PHONY : util/MsgBox.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -425,6 +452,9 @@ help:
 	@echo "... ui/XEdit.o"
 	@echo "... ui/XEdit.i"
 	@echo "... ui/XEdit.s"
+	@echo "... util/MsgBox.o"
+	@echo "... util/MsgBox.i"
+	@echo "... util/MsgBox.s"
 .PHONY : help
 
 

@@ -11,6 +11,7 @@ set(CMAKE_DEPENDS_CHECK_CXX
   "/home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.cpp" "/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o"
   "/home/el/projects/GpuPassthroughSetup/ui/Main.cpp" "/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o"
   "/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp" "/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o"
+  "/home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp" "/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

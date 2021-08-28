@@ -6,6 +6,11 @@
 },
 {
   "directory": "/home/el/projects/GpuPassthroughSetup/build",
+  "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/el/projects/GpuPassthroughSetup/build -I/home/el/projects/GpuPassthroughSetup -I/home/el/projects/GpuPassthroughSetup/build/gpupassthroughsetup_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -o CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o -c /home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp",
+  "file": "/home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp"
+},
+{
+  "directory": "/home/el/projects/GpuPassthroughSetup/build",
   "command": "/usr/bin/c++ -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB -I/home/el/projects/GpuPassthroughSetup/build -I/home/el/projects/GpuPassthroughSetup -I/home/el/projects/GpuPassthroughSetup/build/gpupassthroughsetup_autogen/include -isystem /usr/include/x86_64-linux-gnu/qt5 -isystem /usr/include/x86_64-linux-gnu/qt5/QtWidgets -isystem /usr/include/x86_64-linux-gnu/qt5/QtGui -isystem /usr/include/x86_64-linux-gnu/qt5/QtCore -isystem /usr/lib/x86_64-linux-gnu/qt5/mkspecs/linux-g++ -g -fPIC -o CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o -c /home/el/projects/GpuPassthroughSetup/src/daemonize.cpp",
   "file": "/home/el/projects/GpuPassthroughSetup/src/daemonize.cpp"
 },

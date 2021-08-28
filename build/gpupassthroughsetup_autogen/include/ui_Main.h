@@ -69,6 +69,11 @@ public:
     QLabel *lblUsername;
     QPushButton *btnUsernameFind;
     QPushButton *btnUsernameSave;
+    QLabel *lblCores;
+    QLabel *lblRam;
+    QLineEdit *txtCores;
+    QLineEdit *txtRam;
+    QPushButton *btnEditRamCPU;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAbout;
@@ -92,10 +97,10 @@ public:
         centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
         btnMouseToggle = new QPushButton(centralwidget);
         btnMouseToggle->setObjectName(QString::fromUtf8("btnMouseToggle"));
-        btnMouseToggle->setGeometry(QRect(550, 10, 201, 71));
+        btnMouseToggle->setGeometry(QRect(550, 0, 201, 71));
         btnGo = new QPushButton(centralwidget);
         btnGo->setObjectName(QString::fromUtf8("btnGo"));
-        btnGo->setGeometry(QRect(10, 10, 531, 71));
+        btnGo->setGeometry(QRect(10, 0, 531, 31));
         scrollArea = new QScrollArea(centralwidget);
         scrollArea->setObjectName(QString::fromUtf8("scrollArea"));
         scrollArea->setGeometry(QRect(3, 90, 751, 511));
@@ -221,6 +226,21 @@ public:
         btnUsernameSave->setObjectName(QString::fromUtf8("btnUsernameSave"));
         btnUsernameSave->setGeometry(QRect(600, 30, 99, 38));
         scrollArea->setWidget(scrollAreaWidgetContents);
+        lblCores = new QLabel(centralwidget);
+        lblCores->setObjectName(QString::fromUtf8("lblCores"));
+        lblCores->setGeometry(QRect(20, 30, 121, 22));
+        lblRam = new QLabel(centralwidget);
+        lblRam->setObjectName(QString::fromUtf8("lblRam"));
+        lblRam->setGeometry(QRect(190, 30, 141, 22));
+        txtCores = new QLineEdit(centralwidget);
+        txtCores->setObjectName(QString::fromUtf8("txtCores"));
+        txtCores->setGeometry(QRect(20, 50, 113, 36));
+        txtRam = new QLineEdit(centralwidget);
+        txtRam->setObjectName(QString::fromUtf8("txtRam"));
+        txtRam->setGeometry(QRect(200, 50, 113, 36));
+        btnEditRamCPU = new QPushButton(centralwidget);
+        btnEditRamCPU->setObjectName(QString::fromUtf8("btnEditRamCPU"));
+        btnEditRamCPU->setGeometry(QRect(360, 40, 99, 38));
         Main->setCentralWidget(centralwidget);
         menubar = new QMenuBar(Main);
         menubar->setObjectName(QString::fromUtf8("menubar"));
@@ -272,6 +292,9 @@ public:
         lblUsername->setText(QCoreApplication::translate("Main", "Username", nullptr));
         btnUsernameFind->setText(QCoreApplication::translate("Main", "Help Find", nullptr));
         btnUsernameSave->setText(QCoreApplication::translate("Main", "Save", nullptr));
+        lblCores->setText(QCoreApplication::translate("Main", "# Cores For VM", nullptr));
+        lblRam->setText(QCoreApplication::translate("Main", "Ram In GB for VM", nullptr));
+        btnEditRamCPU->setText(QCoreApplication::translate("Main", "Edit cpu/ram", nullptr));
         menuFile->setTitle(QCoreApplication::translate("Main", "File", nullptr));
         menuAbout->setTitle(QCoreApplication::translate("Main", "About", nullptr));
     } // retranslateUi

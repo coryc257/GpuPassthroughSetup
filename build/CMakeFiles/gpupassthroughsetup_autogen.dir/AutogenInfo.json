@@ -104,6 +104,11 @@
 			"/home/el/projects/GpuPassthroughSetup/ui/XEdit.h",
 			"MU",
 			"UYX5XTB5RZ/moc_XEdit.cpp"
+		],
+		[
+			"/home/el/projects/GpuPassthroughSetup/util/MsgBox.h",
+			"MU",
+			"KH43KSYMFX/moc_MsgBox.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -166,7 +171,8 @@
 			"MU"
 		],
 		[ "/home/el/projects/GpuPassthroughSetup/ui/Main.cpp", "MU" ],
-		[ "/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp", "MU" ]
+		[ "/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp", "MU" ],
+		[ "/home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp", "MU" ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

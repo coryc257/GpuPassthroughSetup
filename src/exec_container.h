@@ -44,6 +44,7 @@ public:
     static void SetUser(QString userName);
     static void SavePassthroughMouse(QString mouseIdentity);
     static void GO();
+    static void SaveRamCpu(QString ramGB, QString cpuCores, QString vmName);
 
     static QString vmName;
     static QString userName;

@@ -12,6 +12,7 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5Widgets CONFIG REQUIRED)
 
 set(gpupassthroughsetup_SRC
+  util/MsgBox.cpp
   src/daemonize.cpp
   src/main.cpp
   #//src/gpupassthroughsetup.cpp

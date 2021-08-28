@@ -9,14 +9,8 @@
 #include "../src/exec_container.h"
 #include "CommandOutputHelp.h"
 #include "XEdit.h"
+#include "../util/MsgBox.h"
 
-static void MsgBox(QString msg)
-{
-    QMessageBox xmsg;
-    xmsg.setWindowTitle(QStringLiteral("Notification"));
-    xmsg.setText(msg);
-    xmsg.exec();
-}
 
 
 Main::Main(QWidget* parent) :
@@ -37,22 +31,23 @@ Main::Main(QWidget* parent) :
     m_ui->txtPassthroughMouse->setText(Operations::passthroughMouse);
     m_ui->txtUsername->setText(Operations::userName);
 
-    connect(m_ui->actionExit, SIGNAL(triggered()), this, SLOT(CloseMe()));
-    connect(m_ui->actionHelp, SIGNAL(triggered()), this, SLOT(Help()));
-    connect(m_ui->btnGo, SIGNAL(clicked()), this, SLOT(Go()));
-    connect(m_ui->btnVmNameFind, SIGNAL(clicked()), this, SLOT(finderVmName()));
-    connect(m_ui->btnVmNameSave, SIGNAL(clicked()), this, SLOT(saveVmName()));
-    connect(m_ui->btnVmXConfigFind, SIGNAL(clicked()), this, SLOT(finderVmXConfig()));
-    connect(m_ui->btnVMXConfigPick, SIGNAL(clicked()), this, SLOT(saveVmXConfigChooser()));
-    connect(m_ui->btnEvDevKeyboardFind, SIGNAL(clicked()), this, SLOT(finderEvDevKeyboard()));
-    connect(m_ui->btnPassthroughMouseFind, SIGNAL(clicked()), this, SLOT(finderPassthroughMouse()));
-    connect(m_ui->btnPassthroughMouseSave, SIGNAL(clicked()), this, SLOT(savePassthroughMouse()));
-    connect(m_ui->btnUsernameSave, SIGNAL(clicked()), this, SLOT(saveUsername()));
-    connect(m_ui->btnUsernameFind, SIGNAL(clicked()), this, SLOT(finderUserName()));
-    connect(m_ui->btnEvDevKeyboardEdit, SIGNAL(clicked()), this, SLOT(finderEvDevKeyboard()));
-    connect(m_ui->btnNormalXConfigFind, SIGNAL(clicked()), this, SLOT(finderNormalXConfig()));
-    connect(m_ui->btnNormalXConfigPick, SIGNAL(clicked()), this, SLOT(saveNormalXConfigChooser()));\
-    connect(m_ui->btnIOMMUGroupFind, SIGNAL(clicked()), this, SLOT(findIOMMU()));
+    connect(m_ui->actionExit,               SIGNAL(triggered()),    this, SLOT(CloseMe()));
+    connect(m_ui->actionHelp,               SIGNAL(triggered()),    this, SLOT(Help()));
+    connect(m_ui->btnGo,                    SIGNAL(clicked()),      this, SLOT(Go()));
+    connect(m_ui->btnVmNameFind,            SIGNAL(clicked()),      this, SLOT(finderVmName()));
+    connect(m_ui->btnVmNameSave,            SIGNAL(clicked()),      this, SLOT(saveVmName()));
+    connect(m_ui->btnVmXConfigFind,         SIGNAL(clicked()),      this, SLOT(finderVmXConfig()));
+    connect(m_ui->btnVMXConfigPick,         SIGNAL(clicked()),      this, SLOT(saveVmXConfigChooser()));
+    connect(m_ui->btnEvDevKeyboardFind,     SIGNAL(clicked()),      this, SLOT(finderEvDevKeyboard()));
+    connect(m_ui->btnPassthroughMouseFind,  SIGNAL(clicked()),      this, SLOT(finderPassthroughMouse()));
+    connect(m_ui->btnPassthroughMouseSave,  SIGNAL(clicked()),      this, SLOT(savePassthroughMouse()));
+    connect(m_ui->btnUsernameSave,          SIGNAL(clicked()),      this, SLOT(saveUsername()));
+    connect(m_ui->btnUsernameFind,          SIGNAL(clicked()),      this, SLOT(finderUserName()));
+    connect(m_ui->btnEvDevKeyboardEdit,     SIGNAL(clicked()),      this, SLOT(finderEvDevKeyboard()));
+    connect(m_ui->btnNormalXConfigFind,     SIGNAL(clicked()),      this, SLOT(finderNormalXConfig()));
+    connect(m_ui->btnNormalXConfigPick,     SIGNAL(clicked()),      this, SLOT(saveNormalXConfigChooser()));
+    connect(m_ui->btnIOMMUGroupFind,        SIGNAL(clicked()),      this, SLOT(findIOMMU()));
+    connect(m_ui->btnEditRamCPU,            SIGNAL(clicked()),      this, SLOT(saveCpuRam()));
 }
 
 void Main::Go()
@@ -231,6 +226,12 @@ void Main::savePassthroughMouse()
 {
     Operations::SavePassthroughMouse(m_ui->txtPassthroughMouse->text());
 }
+
+void Main::saveCpuRam()
+{
+    Operations::SaveRamCpu(m_ui->txtRam->text(), m_ui->txtCores->text(), m_ui->txtVmName->text());
+}
+
 
 
 

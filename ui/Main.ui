@@ -36,7 +36,7 @@
     <property name="geometry">
      <rect>
       <x>550</x>
-      <y>10</y>
+      <y>0</y>
       <width>201</width>
       <height>71</height>
      </rect>
@@ -49,9 +49,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
+      <y>0</y>
       <width>531</width>
-      <height>71</height>
+      <height>31</height>
      </rect>
     </property>
     <property name="text">
@@ -526,6 +526,65 @@
       </widget>
      </widget>
     </widget>
+   </widget>
+   <widget class="QLabel" name="lblCores">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>30</y>
+      <width>121</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string># Cores For VM</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="lblRam">
+    <property name="geometry">
+     <rect>
+      <x>190</x>
+      <y>30</y>
+      <width>141</width>
+      <height>22</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Ram In GB for VM</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtCores">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>50</y>
+      <width>113</width>
+      <height>36</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="txtRam">
+    <property name="geometry">
+     <rect>
+      <x>200</x>
+      <y>50</y>
+      <width>113</width>
+      <height>36</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="btnEditRamCPU">
+    <property name="geometry">
+     <rect>
+      <x>360</x>
+      <y>40</y>
+      <width>99</width>
+      <height>38</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Edit cpu/ram</string>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">

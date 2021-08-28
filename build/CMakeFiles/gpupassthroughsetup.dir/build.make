@@ -89,9 +89,22 @@ CMakeFiles/gpupassthroughsetup.dir/gpupassthroughsetup_autogen/mocs_compilation.
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gpupassthroughsetup.dir/gpupassthroughsetup_autogen/mocs_compilation.cpp.s"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/el/projects/GpuPassthroughSetup/build/gpupassthroughsetup_autogen/mocs_compilation.cpp -o CMakeFiles/gpupassthroughsetup.dir/gpupassthroughsetup_autogen/mocs_compilation.cpp.s
 
+CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
+CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o: ../util/MsgBox.cpp
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o -c /home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp
+
+CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp > CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.i
+
+CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp -o CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.s
+
 CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
 CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: ../src/daemonize.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o -c /home/el/projects/GpuPassthroughSetup/src/daemonize.cpp
 
 CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.i: cmake_force
@@ -104,7 +117,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.s: cmake_force
 
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: ../src/main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o -c /home/el/projects/GpuPassthroughSetup/src/main.cpp
 
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.i: cmake_force
@@ -117,7 +130,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.s: cmake_force
 
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: ../src/exec_container.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o -c /home/el/projects/GpuPassthroughSetup/src/exec_container.cpp
 
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.i: cmake_force
@@ -130,7 +143,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.s: cmake_force
 
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: ../ui/Main.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o -c /home/el/projects/GpuPassthroughSetup/ui/Main.cpp
 
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.i: cmake_force
@@ -143,7 +156,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.s: cmake_force
 
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: ../ui/CommandOutputHelp.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o -c /home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.cpp
 
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.i: cmake_force
@@ -156,7 +169,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.s: cmake_force
 
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: CMakeFiles/gpupassthroughsetup.dir/flags.make
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: ../ui/XEdit.cpp
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Building CXX object CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o"
 	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o -c /home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp
 
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.i: cmake_force
@@ -170,6 +183,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.s: cmake_force
 # Object files for target gpupassthroughsetup
 gpupassthroughsetup_OBJECTS = \
 "CMakeFiles/gpupassthroughsetup.dir/gpupassthroughsetup_autogen/mocs_compilation.cpp.o" \
+"CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o" \
 "CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o" \
 "CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o" \
 "CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o" \
@@ -181,6 +195,7 @@ gpupassthroughsetup_OBJECTS = \
 gpupassthroughsetup_EXTERNAL_OBJECTS =
 
 gpupassthroughsetup: CMakeFiles/gpupassthroughsetup.dir/gpupassthroughsetup_autogen/mocs_compilation.cpp.o
+gpupassthroughsetup: CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o
 gpupassthroughsetup: CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o
 gpupassthroughsetup: CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o
 gpupassthroughsetup: CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o
@@ -192,7 +207,7 @@ gpupassthroughsetup: /usr/lib/x86_64-linux-gnu/libQt5Widgets.so.5.15.2
 gpupassthroughsetup: /usr/lib/x86_64-linux-gnu/libQt5Gui.so.5.15.2
 gpupassthroughsetup: /usr/lib/x86_64-linux-gnu/libQt5Core.so.5.15.2
 gpupassthroughsetup: CMakeFiles/gpupassthroughsetup.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_8) "Linking CXX executable gpupassthroughsetup"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/el/projects/GpuPassthroughSetup/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_9) "Linking CXX executable gpupassthroughsetup"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/gpupassthroughsetup.dir/link.txt --verbose=$(VERBOSE)
 	chmod +x /home/el/projects/GpuPassthroughSetup/build/find_groups.sh
 

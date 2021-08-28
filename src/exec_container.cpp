@@ -4,7 +4,9 @@
 #include <QDir>
 #include <QThread>
 #include <QFile>
+#include <QMap>
 #include "daemonize.h"
+#include "../util/MsgBox.h"
 #define CONFIG_FOLDER QStandardPaths::standardLocations(QStandardPaths::StandardLocation::HomeLocation)[0] + QStringLiteral("/.gpu_passthrough")
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //ExecContainer
@@ -51,6 +53,21 @@
     int Operations::pointOfFailure = 0;
     bool Operations::debugOnly = false;
     bool Operations::reloadNvidia = false;
+
+
+    class CPU_CORE
+    {
+    public:
+        QString CPU;
+        QString NODE;
+        QString SOCKET;
+        QString CORE;
+        QString L1d;
+        QString L1i;
+        QString L2;
+        QString L3;
+        QString ONLINE;
+    };
 
     void Operations::Init()
     {
@@ -296,6 +313,85 @@
         );
         Operations::WipeKScreen(Operations::userName);
     }
+
+    static void __CpuGetInfo__AddItem(QString Item, QList<CPU_CORE> *list)
+    {
+        QStringList columns = Item.replace(QStringLiteral(" "), QStringLiteral("\t")).remove(QStringLiteral("\n")).split(QStringLiteral("\t"), Qt::SplitBehaviorFlags::SkipEmptyParts);
+        if (columns[0].compare(QStringLiteral("CPU")) != 0) {
+            CPU_CORE newCore;
+
+            if (columns.count() != 6)
+                return;
+            QStringList cacheItems = columns[4].split(QStringLiteral(":"));
+            if (cacheItems.count() != 4)
+                return;
+
+            newCore.CPU = columns[0];
+            newCore.NODE = columns[1];
+            newCore.SOCKET = columns[2];
+            newCore.CORE = columns[3];
+            newCore.L1d = cacheItems[0];
+            newCore.L1i = cacheItems[1];
+            newCore.L2 = cacheItems[2];
+            newCore.L3 = cacheItems[3];
+            newCore.ONLINE = columns[5];
+            list->append(newCore);
+        }
+    }
+
+    static QList<CPU_CORE> __GetCpuInfo()
+    {
+        QList<CPU_CORE> retVal;
+        BashCommandResult res = Operations::BashCommand(QStringLiteral("lscpu -e"));
+
+        if (res.Success) {
+            Q_FOREACH(QString Item, res.Output.split(QStringLiteral("\n"))) {
+                if (Item.trimmed().length() == 0)
+                    continue;
+                __CpuGetInfo__AddItem(Item, &retVal);
+            }
+        }
+
+        return retVal;
+    }
+
+    void Operations::SaveRamCpu(QString ramGB, QString cpuCores, QString vmName)
+    {
+        BashCommandResult cpuRes;
+        QList<CPU_CORE> cpuInfo = __GetCpuInfo();
+        QMap<QString, int> l3Groups;
+
+        int ram = ramGB.split(QStringLiteral(" "))[0].toInt();
+        int cores = cpuCores.split(QStringLiteral(" "))[0].toInt();
+
+        ram = 1024 * ram;
+
+
+        Q_FOREACH(CPU_CORE core, cpuInfo) {
+            if (!l3Groups.contains(core.L3)) {
+                l3Groups[core.L3] = 1;
+            } else {
+                l3Groups[core.L3] += 1;
+            }
+        }
+
+        if (l3Groups.count() > 1) { // FORCE A SPLIT on the L3 Cache
+            if (cores != l3Groups[l3Groups.keys()[1]]) {
+                QString sv = QString::number(l3Groups[l3Groups.keys()[1]]);
+                MsgBox(QStringLiteral("You must assign a number of cores equal to an L3 cache boundary(") + sv + QStringLiteral(")"));
+                return;
+            }
+        } else { // DO WHAT TOLD
+            // TODO
+            // Start with odds
+
+            // Work backwards
+
+            // Make sure we have at least two cores to pin to the emulator
+        }
+
+    }
+
 
 
     void Operations::UnbindGPU()

@@ -4,6 +4,9 @@
 #include <QString>
 #include <QStringList>
 #include <QProcess>
+#include <QMap>
+#include <QList>
+#include "../util/SAFE_RETURN.h"
 
 class ExecContainer
 {
@@ -29,6 +32,42 @@ class BashCommandResult
         bool Success;
 };
 
+class CPU_CORE
+{
+public:
+    QString CPU;
+    QString NODE;
+    QString SOCKET;
+    QString CORE;
+    QString L1d;
+    QString L1i;
+    QString L2;
+    QString L3;
+    QString ONLINE;
+};
+
+class CpuTune
+{
+public:
+    bool Success;
+    QString ErrorMessage;
+    QList<CPU_CORE> assignedCores;
+    QList<int> emulatorPin;
+    QMap<int, int> l3Groups;
+    QMap<int, QList<CPU_CORE>> l1Groups;
+    QString vmConfig;
+    int ram;
+    int ramKiB;
+    int cores;
+};
+
+class PciPassthroughInfo
+{
+public:
+    QStringList devices;
+    QString vmConfig;
+};
+
 class Operations
 {
 public:
@@ -40,12 +79,15 @@ public:
     static void SetVmXConfig(QString xConfigFile);
     static void SetNonVmXConfig(QString xConfigFile);
     static void SetQEmuCommandLine(QString vmName, QString device);
-    static void SetVMName(QString vmName);
+
     static void SetUser(QString userName);
     static void SavePassthroughMouse(QString mouseIdentity);
     static void GO();
     static void SaveRamCpu(QString ramGB, QString cpuCores, QString vmName);
-    static void SaveIOMMU(QString iommuGroup, QString vmName);
+
+
+    static void SetVMName(SAFE_RETURN *retVal, QString vmName);
+    static void SaveIOMMU(SAFE_RETURN *retVal, QString iommuGroup, QString vmName);
 
     static QString vmName;
     static QString userName;
@@ -59,6 +101,8 @@ public:
     static QString Ram;
     static QString Cpu;
 
+
+
     static BashCommandResult BashCommand(QString command);
     static BashCommandResult BashCommandNoLog(QString command);
     static QString CatThat(QString fileName);
@@ -67,6 +111,7 @@ private:
 
     static __EXEC_INSTANCE me;
     static int pointOfFailure;
+    static CpuTune __tuneInfo;
 
     static void WipeKScreen(QString userName);
     static void __Init();

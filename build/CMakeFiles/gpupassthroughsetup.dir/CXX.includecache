@@ -6,35 +6,17 @@
 
 #IncludeRegexTransform: 
 
-/home/el/projects/GpuPassthroughSetup/src/daemonize.h
-
-/home/el/projects/GpuPassthroughSetup/src/exec_container.cpp
-exec_container.h
-/home/el/projects/GpuPassthroughSetup/src/exec_container.h
-QTextCodec
--
-QStandardPaths
--
-QDir
--
-QThread
--
-QFile
--
-QMap
--
-daemonize.h
-/home/el/projects/GpuPassthroughSetup/src/daemonize.h
-../util/MsgBox.h
+/home/el/projects/GpuPassthroughSetup/util/HANDLE_UI_RETURN.cpp
+SAFE_RETURN.h
+/home/el/projects/GpuPassthroughSetup/util/SAFE_RETURN.h
+HANDLE_UI_RETURN.h
+/home/el/projects/GpuPassthroughSetup/util/HANDLE_UI_RETURN.h
+MsgBox.h
 /home/el/projects/GpuPassthroughSetup/util/MsgBox.h
 
-/home/el/projects/GpuPassthroughSetup/src/exec_container.h
-QString
--
-QStringList
--
-QProcess
--
+/home/el/projects/GpuPassthroughSetup/util/HANDLE_UI_RETURN.h
+SAFE_RETURN.h
+/home/el/projects/GpuPassthroughSetup/util/SAFE_RETURN.h
 
 /home/el/projects/GpuPassthroughSetup/util/MsgBox.h
 QString
@@ -42,41 +24,31 @@ QString
 QMessageBox
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QDir
-qdir.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qdir.h
+/home/el/projects/GpuPassthroughSetup/util/SAFE_RETURN.h
+QString
+-
+QBuffer
+-
+QMap
+-
+QObject
+-
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QFile
-qfile.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QBuffer
+qbuffer.h
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qbuffer.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap
 qmap.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
-qprocess.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qprocess.h
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QStandardPaths
-qstandardpaths.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstandardpaths.h
+/usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
+qobject.h
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 qstring.h
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
-qstringlist.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstringlist.h
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QTextCodec
-qtextcodec.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qtextcodec.h
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/QThread
-qthread.h
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qthread.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h
 QtCore/qglobal.h
@@ -118,6 +90,12 @@ QtCore/qatomic_bootstrap.h
 QtCore/qatomic_cxx11.h
 -
 QtCore/qatomic_msvc.h
+-
+
+/usr/include/x86_64-linux-gnu/qt5/QtCore/qbuffer.h
+QtCore/qiodevice.h
+-
+QtCore/qbytearray.h
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearray.h
@@ -192,20 +170,6 @@ QtCore/qiodevice.h
 QtCore/qpair.h
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qdeadlinetimer.h
-QtCore/qelapsedtimer.h
--
-QtCore/qmetatype.h
--
-QtCore/qnamespace.h
--
-QtCore/qpair.h
--
-limits
--
-chrono
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h
 QtCore/qalgorithms.h
 -
@@ -238,20 +202,6 @@ map
 utility
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qdir.h
-QtCore/qstring.h
--
-QtCore/qfileinfo.h
--
-QtCore/qstringlist.h
--
-QtCore/qshareddata.h
--
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qelapsedtimer.h
-QtCore/qglobal.h
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qfile.h
 QtCore/qfiledevice.h
 -
@@ -264,16 +214,6 @@ stdio.h
 QtCore/qiodevice.h
 -
 QtCore/qstring.h
--
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qfileinfo.h
-QtCore/qfile.h
--
-QtCore/qlist.h
--
-QtCore/qshareddata.h
--
-QtCore/qmetatype.h
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qflags.h
@@ -542,16 +482,6 @@ QtCore/qglobal.h
 QtCore/qnamespace.h
 -
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qprocess.h
-QtCore/qiodevice.h
--
-QtCore/qstringlist.h
--
-QtCore/qshareddata.h
--
-functional
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h
 QtCore/qglobal.h
 -
@@ -630,12 +560,6 @@ memory
 QtCore/qnamespace.h
 -
 QtCore/qmargins.h
--
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qstandardpaths.h
-QtCore/qstringlist.h
--
-QtCore/qobjectdefs.h
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h
@@ -726,12 +650,6 @@ AvailabilityMacros.h
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtcore-config.h
 
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qtextcodec.h
-QtCore/qstring.h
--
-QtCore/qlist.h
--
-
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h
 QtCore/qiodevice.h
 -
@@ -744,16 +662,6 @@ QtCore/qlocale.h
 QtCore/qscopedpointer.h
 -
 stdio.h
--
-
-/usr/include/x86_64-linux-gnu/qt5/QtCore/qthread.h
-QtCore/qobject.h
--
-QtCore/qdeadlinetimer.h
--
-future
--
-functional
 -
 
 /usr/include/x86_64-linux-gnu/qt5/QtCore/qtypeinfo.h

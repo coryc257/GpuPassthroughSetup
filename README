@@ -1,18 +1,2 @@
-CMake Qt5 GUI Template
-----------------------
-
-You need Qt5 and CMake 2.8.11 or higher
-
--- Build instructions --
-
-cd /your/project/build
-cmake ../
-make
-
-./gpupassthroughsetup
-
-
--- Tutorials and resources --
-
-Qt online docs
-https://doc.qt.io/
+Wizard with with a focus on showing you how to set up a gaming vm as well as a vm bootstrapper/monitoring service
+A windows service is to be isntalled to allow interop with a host OS when you don't have two cards

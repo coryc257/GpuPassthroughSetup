@@ -12,6 +12,8 @@ set(CMAKE_AUTOUIC ON)
 find_package(Qt5Widgets CONFIG REQUIRED)
 
 set(gpupassthroughsetup_SRC
+  util/SAFE_RETURN.cpp
+  util/HANDLE_UI_RETURN.cpp
   util/MsgBox.cpp
   src/daemonize.cpp
   src/main.cpp

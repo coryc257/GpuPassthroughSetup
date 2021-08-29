@@ -4,6 +4,8 @@
 #include "exec_container.h"
 #include "daemonize.h"
 
+#include "exec_container.h"
+
 int main(int argc, char *argv[])
 {
     //QApplication app(argc, argv);
@@ -17,6 +19,7 @@ int main(int argc, char *argv[])
     gpu_rebind();
     x_UP();
     */
+
 
     // TODO: PCI Device Selection
     if (argc == 1 ) { //GUI
@@ -36,7 +39,8 @@ int main(int argc, char *argv[])
         qInfo("Step 4: Set up the User Name Running the Desktop Environment\n\t%s USER <user name here>\n", argv[0]);
         qInfo("Step 5: Hold on to your butts\n\t%s GO", argv[0]);
     } else {
-        Operations::Init();
+        // DEPRECATED
+        /*Operations::Init();
         if (strcmp(argv[1], "VMNAME") == 0) {
             if (argc == 3) {
                 Operations::SetVMName(QLatin1String(argv[2]));
@@ -58,7 +62,7 @@ int main(int argc, char *argv[])
             // It had to be done
             Operations::GO();
             //Operations::WipeKScreen(QStringLiteral("el"));
-        }
+        }*/
     }
 }
 

@@ -9,7 +9,9 @@ file(REMOVE_RECURSE
   "CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o"
   "CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o"
   "CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o"
+  "CMakeFiles/gpupassthroughsetup.dir/util/HANDLE_UI_RETURN.cpp.o"
   "CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.o"
+  "CMakeFiles/gpupassthroughsetup.dir/util/SAFE_RETURN.cpp.o"
   "gpupassthroughsetup"
   "gpupassthroughsetup.pdb"
 )

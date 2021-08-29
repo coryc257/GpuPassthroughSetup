@@ -106,9 +106,19 @@
 			"UYX5XTB5RZ/moc_XEdit.cpp"
 		],
 		[
+			"/home/el/projects/GpuPassthroughSetup/util/HANDLE_UI_RETURN.h",
+			"MU",
+			"KH43KSYMFX/moc_HANDLE_UI_RETURN.cpp"
+		],
+		[
 			"/home/el/projects/GpuPassthroughSetup/util/MsgBox.h",
 			"MU",
 			"KH43KSYMFX/moc_MsgBox.cpp"
+		],
+		[
+			"/home/el/projects/GpuPassthroughSetup/util/SAFE_RETURN.h",
+			"MU",
+			"KH43KSYMFX/moc_SAFE_RETURN.cpp"
 		]
 	],
 	"HEADER_EXTENSIONS" : [ "h", "hh", "h++", "hm", "hpp", "hxx", "in", "txx" ],
@@ -172,7 +182,12 @@
 		],
 		[ "/home/el/projects/GpuPassthroughSetup/ui/Main.cpp", "MU" ],
 		[ "/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp", "MU" ],
-		[ "/home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp", "MU" ]
+		[
+			"/home/el/projects/GpuPassthroughSetup/util/HANDLE_UI_RETURN.cpp",
+			"MU"
+		],
+		[ "/home/el/projects/GpuPassthroughSetup/util/MsgBox.cpp", "MU" ],
+		[ "/home/el/projects/GpuPassthroughSetup/util/SAFE_RETURN.cpp", "MU" ]
 	],
 	"UIC_OPTIONS" : [],
 	"UIC_SEARCH_PATHS" : [],

@@ -10,7 +10,8 @@
 #include "CommandOutputHelp.h"
 #include "XEdit.h"
 #include "../util/MsgBox.h"
-
+#include "../util/SAFE_RETURN.h"
+#include "../util/HANDLE_UI_RETURN.h"
 
 
 Main::Main(QWidget* parent) :
@@ -117,13 +118,11 @@ void Main::finderVmXConfig()
         xConfig = Operations::CatThat(QStringLiteral("/etc/X11/xorg.conf"));
     }
 
-    //= Operations::CatThat(QStringLiteral("/etc/X11/xorg.conf"));
     XEdit edit;
     edit.setDetails(xConfig, QStringLiteral("Set up your XConfig how you want it then come back here and click ok or edit it right here right now"));
     edit.exec();
     if (edit.result() == QDialog::DialogCode::Accepted) {
         Operations::SaveVmXConfig(edit.getXConfig());
-        //Operations::SaveVmXConfig(xConfig);
     }
 }
 
@@ -137,13 +136,11 @@ void Main::finderNormalXConfig()
         xConfig = Operations::CatThat(QStringLiteral("/etc/X11/xorg.conf"));
     }
 
-    //= Operations::CatThat(QStringLiteral("/etc/X11/xorg.conf"));
     XEdit edit;
     edit.setDetails(xConfig, QStringLiteral("Set up your XConfig how you want it then come back here and click ok or edit it right here right now"));
     edit.exec();
     if (edit.result() == QDialog::DialogCode::Accepted) {
         Operations::SaveNonVmXConfig(edit.getXConfig());
-        //Operations::SaveVmXConfig(xConfig);
     }
 }
 
@@ -190,7 +187,11 @@ void Main::findIOMMU()
 // Savers
 void Main::saveVmName()
 {
-    Operations::SetVMName(m_ui->txtVmName->text());
+    SAFE_RETURN status;
+    Operations::SetVMName(&status, m_ui->txtVmName->text());
+    if (!IS_OK(status)) {
+        HANDLE_UI_RETURN::HANDLE(&status);
+    }
 }
 
 void Main::saveUsername()
@@ -227,7 +228,11 @@ void Main::saveEvDevKeyboard()
 
 void Main::saveIOMMU()
 {
-    Operations::SaveIOMMU(m_ui->txtIOMMUGroup->text(), m_ui->txtVmName->text());
+    SAFE_RETURN status;
+    Operations::SaveIOMMU(&status, m_ui->txtIOMMUGroup->text(), m_ui->txtVmName->text());
+    if (!IS_OK(status)) {
+        HANDLE_UI_RETURN::HANDLE(&status);
+    }
 }
 
 

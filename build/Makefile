@@ -390,6 +390,33 @@ ui/XEdit.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.s
 .PHONY : ui/XEdit.cpp.s
 
+util/HANDLE_UI_RETURN.o: util/HANDLE_UI_RETURN.cpp.o
+
+.PHONY : util/HANDLE_UI_RETURN.o
+
+# target to build an object file
+util/HANDLE_UI_RETURN.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/HANDLE_UI_RETURN.cpp.o
+.PHONY : util/HANDLE_UI_RETURN.cpp.o
+
+util/HANDLE_UI_RETURN.i: util/HANDLE_UI_RETURN.cpp.i
+
+.PHONY : util/HANDLE_UI_RETURN.i
+
+# target to preprocess a source file
+util/HANDLE_UI_RETURN.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/HANDLE_UI_RETURN.cpp.i
+.PHONY : util/HANDLE_UI_RETURN.cpp.i
+
+util/HANDLE_UI_RETURN.s: util/HANDLE_UI_RETURN.cpp.s
+
+.PHONY : util/HANDLE_UI_RETURN.s
+
+# target to generate assembly for a file
+util/HANDLE_UI_RETURN.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/HANDLE_UI_RETURN.cpp.s
+.PHONY : util/HANDLE_UI_RETURN.cpp.s
+
 util/MsgBox.o: util/MsgBox.cpp.o
 
 .PHONY : util/MsgBox.o
@@ -416,6 +443,33 @@ util/MsgBox.s: util/MsgBox.cpp.s
 util/MsgBox.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/MsgBox.cpp.s
 .PHONY : util/MsgBox.cpp.s
+
+util/SAFE_RETURN.o: util/SAFE_RETURN.cpp.o
+
+.PHONY : util/SAFE_RETURN.o
+
+# target to build an object file
+util/SAFE_RETURN.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/SAFE_RETURN.cpp.o
+.PHONY : util/SAFE_RETURN.cpp.o
+
+util/SAFE_RETURN.i: util/SAFE_RETURN.cpp.i
+
+.PHONY : util/SAFE_RETURN.i
+
+# target to preprocess a source file
+util/SAFE_RETURN.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/SAFE_RETURN.cpp.i
+.PHONY : util/SAFE_RETURN.cpp.i
+
+util/SAFE_RETURN.s: util/SAFE_RETURN.cpp.s
+
+.PHONY : util/SAFE_RETURN.s
+
+# target to generate assembly for a file
+util/SAFE_RETURN.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/gpupassthroughsetup.dir/build.make CMakeFiles/gpupassthroughsetup.dir/util/SAFE_RETURN.cpp.s
+.PHONY : util/SAFE_RETURN.cpp.s
 
 # Help Target
 help:
@@ -452,9 +506,15 @@ help:
 	@echo "... ui/XEdit.o"
 	@echo "... ui/XEdit.i"
 	@echo "... ui/XEdit.s"
+	@echo "... util/HANDLE_UI_RETURN.o"
+	@echo "... util/HANDLE_UI_RETURN.i"
+	@echo "... util/HANDLE_UI_RETURN.s"
 	@echo "... util/MsgBox.o"
 	@echo "... util/MsgBox.i"
 	@echo "... util/MsgBox.s"
+	@echo "... util/SAFE_RETURN.o"
+	@echo "... util/SAFE_RETURN.i"
+	@echo "... util/SAFE_RETURN.s"
 .PHONY : help
 
 

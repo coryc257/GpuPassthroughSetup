@@ -45,6 +45,7 @@ public:
     static void SavePassthroughMouse(QString mouseIdentity);
     static void GO();
     static void SaveRamCpu(QString ramGB, QString cpuCores, QString vmName);
+    static void SaveIOMMU(QString iommuGroup, QString vmName);
 
     static QString vmName;
     static QString userName;
@@ -54,6 +55,9 @@ public:
     static QString passthroughMouse;
     static QStringList deviceList;
     static QStringList detachedDeviceList;
+    static QString IOMMUGroup;
+    static QString Ram;
+    static QString Cpu;
 
     static BashCommandResult BashCommand(QString command);
     static BashCommandResult BashCommandNoLog(QString command);

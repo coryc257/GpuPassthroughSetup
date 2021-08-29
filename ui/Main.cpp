@@ -30,6 +30,9 @@ Main::Main(QWidget* parent) :
     m_ui->txtEvDevKeyboard->setText(Operations::evDevKeyboard);
     m_ui->txtPassthroughMouse->setText(Operations::passthroughMouse);
     m_ui->txtUsername->setText(Operations::userName);
+    m_ui->txtIOMMUGroup->setText(Operations::IOMMUGroup);
+    m_ui->txtCores->setText(Operations::Cpu);
+    m_ui->txtRam->setText(Operations::Ram);
 
     connect(m_ui->actionExit,               SIGNAL(triggered()),    this, SLOT(CloseMe()));
     connect(m_ui->actionHelp,               SIGNAL(triggered()),    this, SLOT(Help()));
@@ -48,6 +51,7 @@ Main::Main(QWidget* parent) :
     connect(m_ui->btnNormalXConfigPick,     SIGNAL(clicked()),      this, SLOT(saveNormalXConfigChooser()));
     connect(m_ui->btnIOMMUGroupFind,        SIGNAL(clicked()),      this, SLOT(findIOMMU()));
     connect(m_ui->btnEditRamCPU,            SIGNAL(clicked()),      this, SLOT(saveCpuRam()));
+    connect(m_ui->btnIOMMUGroupSave,        SIGNAL(clicked()),      this, SLOT(saveIOMMU()));
 }
 
 void Main::Go()
@@ -216,9 +220,14 @@ void Main::saveNormalXConfigChooser()
 
 void Main::saveEvDevKeyboard()
 {
-    QString qEmuCommandLineXml = QStringLiteral("<qemu:commandline>\n\t<qemu:arg value='-object'/>\n\t<qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/event")+m_ui->txtEvDevKeyboard->text()+QStringLiteral(",grab_all=on,repeat=on'/>\n</qemu:commandline>");
+
     Operations::SetQEmuCommandLine(m_ui->txtVmName->text(), m_ui->txtEvDevKeyboard->text());
-    MsgBox(QStringLiteral("Place this under </devices> before </domain>... Middle click to paste\n\n")+qEmuCommandLineXml);
+
+}
+
+void Main::saveIOMMU()
+{
+    Operations::SaveIOMMU(m_ui->txtIOMMUGroup->text(), m_ui->txtVmName->text());
 }
 
 

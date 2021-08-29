@@ -48,6 +48,7 @@ private slots:
     void saveEvDevKeyboard();
     void savePassthroughMouse();
     void saveCpuRam();
+    void saveIOMMU();
 
     // Pickers
     void saveVmXConfigChooser();

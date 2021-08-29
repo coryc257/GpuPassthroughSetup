@@ -50,6 +50,9 @@
     QStringList Operations::detachedDeviceList;
     QString Operations::evDevKeyboard;
     QString Operations::passthroughMouse;
+    QString Operations::IOMMUGroup;
+    QString Operations::Ram;
+    QString Operations::Cpu;
     int Operations::pointOfFailure = 0;
     bool Operations::debugOnly = false;
     bool Operations::reloadNvidia = false;
@@ -114,10 +117,14 @@
     void Operations::SetQEmuCommandLine(QString vmName, QString device)
     {
 
+
+        QString qEmuCommandLineXml = QStringLiteral("<qemu:commandline>\n\t<qemu:arg value='-object'/>\n\t<qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/event")+
+                                    device+QStringLiteral(",grab_all=on,repeat=on'/>\n</qemu:commandline>");
+
         BashCommand(QStringLiteral("printf \"%s\" \"")+device+QStringLiteral("\" > ") + CONFIG_FOLDER + QStringLiteral("/keyboard.param"));
         QProcess virshTerm;
         virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
-
+        MsgBox(QStringLiteral("Place this under </devices> before </domain>... Middle click to paste\n\n")+qEmuCommandLineXml);
     }
 
     void Operations::SavePassthroughMouse(QString mouseIdentity)
@@ -139,6 +146,73 @@
         }
     }
 
+    class PciPassthroughInfo
+    {
+    public:
+        QStringList devices;
+        QString vmConfig;
+    };
+
+    PciPassthroughInfo __get_pci_info(QString iommuGroup, QString groupInfo)
+    {
+        PciPassthroughInfo info;
+        QStringList lines = groupInfo.split(QStringLiteral("\n"));
+        bool inside = false;
+        int busStart = 10;
+
+        info.vmConfig.reserve(4096);
+
+        // Find the line
+        for (int j = 0; j < lines.count(); j++) {
+            if (inside && lines[j].startsWith(QStringLiteral("IOMMU"))) {
+                break;
+            }
+
+            if ( lines[j].contains(QStringLiteral("PCI bridge")))
+                continue;
+
+            if (inside) {
+                QStringList identity = lines[j].trimmed().split(QStringLiteral(" "))[0].replace(QStringLiteral("."),QStringLiteral(":")).split(QStringLiteral(":"));
+
+                info.vmConfig.append(QStringLiteral("<hostdev mode='subsystem' type='pci' managed='yes'>\n"));
+                info.vmConfig.append(QStringLiteral("  <source>\n"));
+                info.vmConfig.append(QStringLiteral("    <address domain='0x0000' bus='0x$1' slot='0x$2' function='0x$3'/>\n")
+                                .replace(QStringLiteral("$1"),identity[0])
+                                .replace(QStringLiteral("$2"),identity[1])
+                                .replace(QStringLiteral("$3"),identity[2])
+                            );
+                info.vmConfig.append(QStringLiteral("  </source>\n"));
+                info.vmConfig.append(QStringLiteral("  <address type='pci' domain='0x0000' bus='0x$1' slot='0x00' function='0x0'/>\n")
+                                        .replace(QStringLiteral("$1"),QString::number(busStart))
+                );
+                info.vmConfig.append(QStringLiteral("</hostdev>\n"));
+
+                busStart++;
+
+                info.devices.append(QStringLiteral("pci_0000_")+identity[0]+QStringLiteral("_")+identity[1]+QStringLiteral("_")+identity[2]);
+            } else if (lines[j].startsWith(iommuGroup)) {
+                inside = true;
+            }
+        }
+
+
+        return info;
+    }
+
+    void Operations::SaveIOMMU(QString iommuGroup, QString vmName)
+    {
+        BashCommandResult res = Operations::BashCommand(QStringLiteral("./find_groups.sh"));
+        if (res.Success) {
+            PciPassthroughInfo info = __get_pci_info(iommuGroup, res.Output);
+            Operations::BashCommand(QStringLiteral("printf \"%s\" \"$1\" > $2")
+                        .replace(QStringLiteral("$1"), iommuGroup)
+                        .replace(QStringLiteral("$2"), CONFIG_FOLDER + QStringLiteral("/iommu.param"))
+            );
+            QProcess virshTerm;
+            virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
+            MsgBox(QStringLiteral("Put this in your config, make sure you don't have duplicate domain,bus,slot,function entries\n\n")+info.vmConfig);
+        }
+    }
 
 
     void Operations::SetVmXConfig(QString xConfigFile)
@@ -286,7 +360,7 @@
         }
         QThread::sleep(10);
 
-        Operations::BashCommand(QStringLiteral("killall kwin_x11"));
+        Operations::BashCommand(QStringLiteral("killall -9 kwin_x11"));
         QThread::sleep(2);
     }
 
@@ -355,13 +429,14 @@
         return retVal;
     }
 
-    static QString __generation_cpu_tune(QList<CPU_CORE> assignedCores, QList<int> emulatorPin)
+    static QString __generation_cpu_tune(QList<CPU_CORE> assignedCores, QList<int> emulatorPin, int ram)
     {
         QString retVal;
         int currentCore = 0;
 
         retVal.reserve(4096);
-
+        retVal.append(QStringLiteral("  <memory unit='KiB'>")+QString::number(ram)+QStringLiteral("</memory>"));
+        retVal.append(QStringLiteral("  <currentMemory unit='KiB'>")+QString::number(ram)+QStringLiteral("</currentMemory>"));
         retVal.append(QStringLiteral("  <vcpu placement='static'>")+QString::number(assignedCores.count())+QStringLiteral("</vcpu>\n"));
         retVal.append(QStringLiteral("  <cpu mode='host-passthrough' check='none' migratable='on'>\n"));
         retVal.append(QStringLiteral("    <topology sockets='1' dies='1' cores='")+QString::number(assignedCores.count()/2)+QStringLiteral("' threads='2'/>\n"));
@@ -398,7 +473,18 @@
         int ram = ramGB.split(QStringLiteral(" "))[0].toInt();
         int cores = cpuCores.split(QStringLiteral(" "))[0].toInt();
 
-        ram = 1024 * ram;
+        Operations::BashCommandNoLog(QStringLiteral("printf \"%s\" \"$1\" > $2")
+            .replace(QStringLiteral("$1"), QString::number(ram))
+            .replace(QStringLiteral("$2"), CONFIG_FOLDER + QStringLiteral("/ram.param"))
+        );
+
+        Operations::BashCommandNoLog(QStringLiteral("printf \"%s\" \"$1\" > $2")
+            .replace(QStringLiteral("$1"), QString::number(cores))
+            .replace(QStringLiteral("$2"), CONFIG_FOLDER + QStringLiteral("/cpu.param"))
+        );
+
+
+        ram = 1024 * 1024 * ram;
 
 
         Q_FOREACH(CPU_CORE core, cpuInfo) {
@@ -422,8 +508,16 @@
                 QString sv = QString::number(l3Groups[1]);
                 MsgBox(QStringLiteral("You must assign a number of cores equal to an L3 cache boundary(") + sv + QStringLiteral(")"));
                 return;
+            } else {
+                Q_FOREACH(CPU_CORE core, cpuInfo) {
+                    int l3 = core.L3.toInt();
+                    if (l3 == 0) {
+                        emulatorPin.append(core.CPU.toInt());
+                    } else if (l3 == 1) {
+                        assignedCores.append(core);
+                    }
+                }
             }
-
         } else { // DO WHAT TOLD
             // TODO
             if (cores % 2 != 0) {
@@ -461,11 +555,11 @@
                 emulatorPin.append(core.CPU.toInt());
             }
 
-            QString vmConfig = __generation_cpu_tune(assignedCores, emulatorPin);
+            QString vmConfig = __generation_cpu_tune(assignedCores, emulatorPin, ram);
             QProcess virshTerm;
             virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
 
-            MsgBox(QStringLiteral("Replace the cputune, cpu and vcpu sections of your config with:\n\n")+vmConfig);
+            MsgBox(QStringLiteral("Replace the memory, currentMemory, cputune, cpu and vcpu sections of your config with:\n\n")+vmConfig);
 
             return;
     }
@@ -567,6 +661,18 @@
                                     );
         Operations::passthroughMouse = Operations::CatThat(
                                         CONFIG_FOLDER + QStringLiteral("/mouse.param")
+                                    );
+
+        Operations::IOMMUGroup = Operations::CatThat(
+                                        CONFIG_FOLDER + QStringLiteral("/iommu.param")
+                                    );
+
+        Operations::Ram = Operations::CatThat(
+                                        CONFIG_FOLDER + QStringLiteral("/ram.param")
+                                    );
+
+        Operations::Cpu = Operations::CatThat(
+                                        CONFIG_FOLDER + QStringLiteral("/cpu.param")
                                     );
 
 

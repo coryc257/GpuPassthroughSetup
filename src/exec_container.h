@@ -7,6 +7,8 @@
 #include <QMap>
 #include <QList>
 #include "../util/SAFE_RETURN.h"
+#include <QSharedMemory>
+#include "../src/daemonize.h"
 
 class ExecContainer
 {
@@ -76,18 +78,19 @@ public:
     static void SaveNonVmXConfig(QString xConfig);
     static void SaveVmXConfig();
     static void SaveVmXConfig(QString xConfig);
-    static void SetVmXConfig(QString xConfigFile);
-    static void SetNonVmXConfig(QString xConfigFile);
-    static void SetQEmuCommandLine(QString vmName, QString device);
 
-    static void SetUser(QString userName);
+
+    static void SetQEmuCommandLine(QString vmName, QString device);
     static void SavePassthroughMouse(QString mouseIdentity);
-    static void GO();
     static void SaveRamCpu(QString ramGB, QString cpuCores, QString vmName);
 
+    static void SetNonVmXConfig (SAFE_RETURN *retVal, QString xConfigFile);
+    static void SetVmXConfig    (SAFE_RETURN *retVal, QString xConfigFile);
+    static void SetUser         (SAFE_RETURN *retVal, QString userName);
+    static void SetVMName       (SAFE_RETURN *retVal, QString vmName);
+    static void SaveIOMMU       (SAFE_RETURN *retVal, QString iommuGroup, QString vmName);
 
-    static void SetVMName(SAFE_RETURN *retVal, QString vmName);
-    static void SaveIOMMU(SAFE_RETURN *retVal, QString iommuGroup, QString vmName);
+    static void GO(GpuWatcherDaemon *angel);
 
     static QString vmName;
     static QString userName;
@@ -100,6 +103,7 @@ public:
     static QString IOMMUGroup;
     static QString Ram;
     static QString Cpu;
+    static bool revertOnVmExit;
 
 
 
@@ -119,7 +123,7 @@ private:
     static void AppendLog(QString logText);
     static void StopX();
     static void StartX();
-
+    static void RevertGPU();
     static void Reboot();
     static void CopyConfig();
     static void RevertConfig();

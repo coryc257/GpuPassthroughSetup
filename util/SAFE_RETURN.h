@@ -12,7 +12,10 @@ enum SAFE_RETURN_CODES
     OK,
     FILE_COPY_ERROR,
     FILE_DELETE_ERROR,
-    FILE_WRITE_ERROR
+    FILE_WRITE_ERROR,
+    COMMAND_ERROR,
+    FORK_ERROR,
+    SHM_CREATE
 };
 
 class RETURN_TYPE
@@ -29,7 +32,6 @@ public:
 class SAFE_RETURN
 {
 public:
-    bool Status;
     SAFE_RETURN_CODES StatusCode;
     QString Message;
     QMap<QString, RETURN_TYPE*> returnData;

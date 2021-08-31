@@ -46,6 +46,7 @@
 //{
     QString Operations::vmName;
     QString Operations::userName;
+
     QString Operations::vmConfig;
     QString Operations::normalConfig;
     QStringList Operations::deviceList;
@@ -55,6 +56,7 @@
     QString Operations::IOMMUGroup;
     QString Operations::Ram;
     QString Operations::Cpu;
+    bool Operations::revertOnVmExit = false;
     CpuTune Operations::__tuneInfo;
     int Operations::pointOfFailure = 0;
     bool Operations::debugOnly = false;
@@ -406,7 +408,7 @@
         BashCommandResult res = Operations::BashCommand(QStringLiteral("./find_groups.sh"));
 
         __write_file(retVal, iommuGroup, CONFIG_FOLDER + QStringLiteral("/iommu.param"));
-        if (retVal->Status && retVal->StatusCode == SAFE_RETURN_CODES::OK) {
+        if (IS_OK((*retVal))) {
             PciPassthroughInfo info = __get_pci_info(iommuGroup, res.Output);
             __vm_edit(QStringLiteral("Put this in your config, make sure you don't have duplicate domain,bus,slot,function entries\n\n")+info.vmConfig, vmName);
         } else {
@@ -415,7 +417,7 @@
     }
 
 
-    void Operations::SetVmXConfig(QString xConfigFile)
+    void Operations::SetVmXConfig(SAFE_RETURN *retVal, QString xConfigFile)
     {
         ExecContainer copy_command = ExecContainer(
                 QStringLiteral("cp"),
@@ -423,10 +425,14 @@
                     xConfigFile,
                     CONFIG_FOLDER + QStringLiteral("/vm_config.conf")
                 }));
-        copy_command.Run();
+        if (!copy_command.Run()) {
+            retVal->StatusCode = SAFE_RETURN_CODES::COMMAND_ERROR;
+            retVal->returnData[QStringLiteral("SetVmXConfig::CommandError")] =
+                RETURN_TYPE::fromQString(copy_command.GetOutputString());
+        }
     }
 
-    void Operations::SetNonVmXConfig(QString xConfigFile)
+    void Operations::SetNonVmXConfig(SAFE_RETURN *retVal, QString xConfigFile)
     {
         ExecContainer copy_command = ExecContainer(
                 QStringLiteral("cp"),
@@ -434,7 +440,11 @@
                     xConfigFile,
                     CONFIG_FOLDER + QStringLiteral("/non_vm_config.conf")
                 }));
-        copy_command.Run();
+        if (!copy_command.Run()) {
+            retVal->StatusCode = SAFE_RETURN_CODES::COMMAND_ERROR;
+            retVal->returnData[QStringLiteral("SetNonVmXConfig::CommandError")] =
+                RETURN_TYPE::fromQString(copy_command.GetOutputString());
+        }
     }
 
 
@@ -446,12 +456,12 @@
         }
     }
 
-    void Operations::SetUser(QString userName)
+    void Operations::SetUser(SAFE_RETURN *retVal, QString userName)
     {
-        Operations::BashCommand(
-            QStringLiteral("printf \"")+userName+QStringLiteral("\" > \"") +
-            CONFIG_FOLDER + QStringLiteral("/user_name.param\""));
-
+        __write_file(retVal, userName, CONFIG_FOLDER + QStringLiteral("/user_name.param\""));
+        if (retVal->StatusCode != SAFE_RETURN_CODES::OK) {
+            retVal->returnData["FileName"] = RETURN_TYPE::fromQString(CONFIG_FOLDER + QStringLiteral("/vm_name.param"));
+        }
     }
 
     void Operations::WipeKScreen(QString userName)
@@ -665,9 +675,16 @@
             }
         }
 
+        if (!(res = Operations::BashCommand(QStringLiteral("rmmod vfio-pci"))).Success) {
+            if (!res.Output.contains(QStringLiteral("is not currently loaded"))) {
+                Operations::pointOfFailure = 7;
+                return;
+            }
+        }
+
         for (int j = 0; j < Operations::deviceList.count(); j++) {
             if (!Operations::BashCommand(QStringLiteral("virsh nodedev-detach ")+Operations::deviceList[j]).Success) {
-                Operations::pointOfFailure = 7;
+                Operations::pointOfFailure = 8;
             } else {
                 Operations::detachedDeviceList.append(Operations::deviceList[j]);
             }
@@ -683,6 +700,18 @@
         Operations::BashCommand(QStringLiteral("modprobe nvidia"));
     }
 
+    void Operations::RevertGPU()
+    {
+        Operations::BashCommand(QStringLiteral("modprobe nvidia"));
+        QThread::sleep(10);
+        Operations::BashCommand(QStringLiteral("echo 0 > /sys/class/vtconsole/vtcon0/bind"));
+        Operations::BashCommand(QStringLiteral("echo 0 > /sys/class/vtconsole/vtcon1/bind"));
+        Operations::BashCommand(
+            QStringLiteral("echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind")
+        );
+        QThread::sleep(10);
+    }
+
     void Operations::StartVM()
     {
         //TODO: MAKE THIS REAL
@@ -696,7 +725,7 @@
         QThread::sleep(10);
 
 
-        Operations::BashCommand(QStringLiteral("chown libvirt-qemu /dev/input/event10 ")+Operations::vmName);
+        Operations::BashCommand(QStringLiteral("chown libvirt-qemu ")+Operations::evDevKeyboard);
 
 
         Operations::BashCommand(QStringLiteral("virsh start ")+Operations::vmName);
@@ -763,18 +792,27 @@
 
 
 
-    void Operations::GO()
+    void Operations::GO(GpuWatcherDaemon *angel)
     {
-        qInfo("Status:%d\n", Operations::pointOfFailure);
+        //qInfo("Status:%d\n", Operations::pointOfFailure);
 
         // Make sure killing the xserver doesn't kill this process
-        DAEMONIZE(0);
+        //DAEMONIZE(0);
 
+        angel->guard(QStringLiteral("Before: __Init()"));
         Operations::__Init();
+        angel->guard(QStringLiteral("After: __Init()"));
 
+        angel->guard(QStringLiteral("Before: ClearLog()"));
         Operations::ClearLog();
+        angel->guard(QStringLiteral("After: ClearLog()"));
+
+        angel->guard(QStringLiteral("Before: ClearLog()"));
         Operations::DEBUG();
+        angel->guard(QStringLiteral("Before: ClearLog()"));
         //Operations::debugOnly = true;
+
+        goto monitor;
 
         //
         // Stop the XServer
@@ -820,13 +858,31 @@
         goto monitor;
 recovery:
         // TODO: figure out unwind based upon point of pointOfFailure
+        goto false_recovery;
         return;
 
 monitor:
         // TODO: wait for vm to exit
+        QThread::sleep(20);
         for(;;){
-
+            BashCommandResult res = BashCommand(QStringLiteral("virsh list --name | grep ")+ Operations::vmName);
+            if (!res.Success)
+                break;
         }
+
+        if (Operations::revertOnVmExit) {
+false_recovery:
+            Operations::StopX();
+            Operations::UnbindGPU();
+            QThread::sleep(10);
+            Operations::RevertConfig();
+            QThread::sleep(10);
+            Operations::WipeKScreen(Operations::userName);
+            Operations::RevertGPU();
+            QThread::sleep(10);
+            Operations::StartX();
+        }
+        exit(EXIT_SUCCESS);
     }
 //}
 ///////////////////////////////////////////////////////////////////////////////////////////////////

@@ -124,6 +124,85 @@ CMakeFiles/gpupassthroughsetup.dir/gpupassthroughsetup_autogen/mocs_compilation.
 
 CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: ../src/daemonize.cpp
 CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: ../src/daemonize.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: ../src/exec_container.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: ../util/SAFE_RETURN.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QBuffer
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QDateTime
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QList
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSharedMemory
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qalgorithms.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qarraydata.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qatomic.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qatomic_bootstrap.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qatomic_cxx11.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qatomic_msvc.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qbasicatomic.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qbuffer.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearray.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qbytearraylist.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qchar.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qcompilerdetection.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qconfig-bootstrapped.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qconfig.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontainerfwd.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontainertools_impl.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qcontiguouscache.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qcoreevent.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qdatetime.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qdebug.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qflags.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qgenericatomic.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobal.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qglobalstatic.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qhash.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qhashfunctions.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiodevice.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qiterator.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlist.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlocale.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qlogging.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmap.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmetatype.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qmutex.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qnamespace.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qnumeric.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qobject_impl.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qobjectdefs_impl.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qpair.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qpoint.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocess.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qprocessordetection.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qrefcount.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qregexp.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedmemory.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstring.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringalgorithms.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringbuilder.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringlist.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringliteral.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringmatcher.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qstringview.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsysinfo.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsystemdetection.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qtcore-config.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qtextstream.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qtypeinfo.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qvariant.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qvarlengtharray.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qvector.h
+CMakeFiles/gpupassthroughsetup.dir/src/daemonize.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qversiontagging.h
 
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: ../src/daemonize.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: ../src/exec_container.cpp
@@ -137,6 +216,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QMap
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
+CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSharedMemory
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStandardPaths
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
@@ -200,6 +280,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h
+CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedmemory.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
 CMakeFiles/gpupassthroughsetup.dir/src/exec_container.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsize.h
@@ -268,6 +349,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QScopedPointer
+CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSharedMemory
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QThread
@@ -329,6 +411,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h
+CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedmemory.h
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsize.h
@@ -394,6 +477,7 @@ CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h
 CMakeFiles/gpupassthroughsetup.dir/src/main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h
 
+CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: ../src/daemonize.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: ../src/exec_container.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: ../ui/CommandOutputHelp.cpp
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: ../ui/CommandOutputHelp.h
@@ -404,6 +488,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QScopedPointer
+CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSharedMemory
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSignalMapper
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
@@ -464,6 +549,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h
+CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedmemory.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsignalmapper.h
@@ -546,6 +632,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h
 CMakeFiles/gpupassthroughsetup.dir/ui/CommandOutputHelp.cpp.o: gpupassthroughsetup_autogen/include/ui_CommandOutputHelp.h
 
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: ../src/daemonize.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: ../src/exec_container.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: ../ui/CommandOutputHelp.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: ../ui/Main.cpp
@@ -561,6 +648,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QScopedPointer
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSharedMemory
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSignalMapper
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
@@ -623,6 +711,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedmemory.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsignalmapper.h
@@ -715,6 +804,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: gpupassthroughsetup_autogen/include/ui_Main.h
 
+CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: ../src/daemonize.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: ../src/exec_container.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: ../ui/XEdit.cpp
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: ../ui/XEdit.h
@@ -725,6 +815,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QObject
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QProcess
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QScopedPointer
+CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSharedMemory
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QSignalMapper
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QString
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/QStringList
@@ -785,6 +876,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qscopedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qset.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qshareddata.h
+CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedmemory.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsharedpointer_impl.h
 CMakeFiles/gpupassthroughsetup.dir/ui/XEdit.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtCore/qsignalmapper.h

@@ -967,10 +967,10 @@
  mdp:/usr/lib/gcc/x86_64-linux-gnu/10/include/stddef.h
  mdp:/usr/lib/gcc/x86_64-linux-gnu/10/include/stdint.h
  mdp:/usr/lib/gcc/x86_64-linux-gnu/10/include/syslimits.h
-/home/el/projects/GpuPassthroughSetup/src/daemonize.cpp
-/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp
- uic:ui_XEdit.h
-/home/el/projects/GpuPassthroughSetup/util/MsgBox.h
+/home/el/projects/GpuPassthroughSetup/src/exec_container.h
 /home/el/projects/GpuPassthroughSetup/ui/CommandOutputHelp.cpp
  uic:ui_CommandOutputHelp.h
-/home/el/projects/GpuPassthroughSetup/src/exec_container.h
+/home/el/projects/GpuPassthroughSetup/util/MsgBox.h
+/home/el/projects/GpuPassthroughSetup/ui/XEdit.cpp
+ uic:ui_XEdit.h
+/home/el/projects/GpuPassthroughSetup/src/daemonize.cpp

@@ -1,5 +1,7 @@
 /*************************************************************************\
-*                  Copyright (C) Michael Kerrisk, 2020.                   *
+*                  Copyright (C) Cory Craig 2021                          *
+*   Adapted from:                                                         *
+* https://man7.org/tlpi/code/online/book/daemons/become_daemon.c.html     *
 *                                                                         *
 * This program is free software. You may use, modify, and redistribute it *
 * under the terms of the GNU Lesser General Public License as published   *
@@ -34,56 +36,223 @@
 #include <sys/un.h>
 #include <termios.h>
 #include <sys/ioctl.h>
+#include <sys/mman.h>
+#include <signal.h>
+#include <sys/wait.h>
 
 #include "daemonize.h"
+#include "../src/exec_container.h"
+#include <QSharedMemory>
+#include <QDateTime>
 
-int                                     /* Returns 0 on success, -1 on error */
-DAEMONIZE(int flags)
+
+
+static void *watch_location;
+
+void GpuWatcherDaemon::Exec(SAFE_RETURN* failInfo, QString vmName)
 {
+    pid_t childPid = 0;
+    int err;
+
+    switch (childPid = fork()) {
+        case -1:
+            failInfo->StatusCode = SAFE_RETURN_CODES::FORK_ERROR;
+            err = errno;
+            failInfo->returnData[QStringLiteral("ForkErrorNumber")] = RETURN_TYPE::fromQString(QString::number(err));
+            return;
+        case 0:
+            GpuWatcherDaemon::Server(vmName);
+            break;
+        default:
+            GpuWatcherDaemon::Client(failInfo, vmName, childPid);
+            break;
+    }
+
+}
+
+GpuWatcherDaemon::GpuWatcherDaemon(bool isDaemon)
+{
+    this->shm = nullptr;
+}
+
+GpuWatcherDaemon::~GpuWatcherDaemon()
+{
+    if (this->shm != nullptr) {
+        this->shm->unlock();
+        this->shm->detach();
+    }
+}
+
+QString GpuWatcherDaemon::GetShmName(QString vmName)
+{
+    return QStringLiteral("GPUPASSTHROUGH__SHM__FOR__") + vmName;
+}
+
+
+void GpuWatcherDaemon::Client(SAFE_RETURN* failInfo, QString vmName, pid_t child)
+{
+    GpuWatcherDaemon application(false);
+    application.shm = new QSharedMemory();
+    INSTANCE_INFO *info;
+
+    application.shm->setKey(GpuWatcherDaemon::GetShmName(vmName));
+    QDateTime startDateTime = QDateTime::currentDateTime();
+    while (!application.shm->create(sizeof(INSTANCE_INFO))) {
+        application.shm->attach();
+        application.shm->detach();
+
+        if (startDateTime.msecsTo(QDateTime::currentDateTime()) > 5000) {
+            failInfo->StatusCode = SAFE_RETURN_CODES::SHM_CREATE;
+            failInfo->returnData["ShmCreateError"] = RETURN_TYPE::fromQString(application.shm->errorString());
+            kill(child,SIGKILL);
+            waitpid(child, NULL, 0);
+            return;
+        }
+    }
+
+    application.shm->lock();
+    info = (INSTANCE_INFO *)application.shm->data();
+    info->initialized = 257;
+    info->serverPid = child;
+    info->daemonPid = 0;
+    info->serverFinished = 0;
+    info->daemonFinished = 0;
+    info->err = 0;
+    memset(info->message,0,2000);
+
+    printf("%s\n", "Initialized");
+    application.shm->unlock();
+    for (;;) {
+        application.shm->lock();
+        info = (INSTANCE_INFO *)application.shm->data();
+        if (info->initialized == 1) {
+            break;
+        }
+        application.shm->unlock();
+    }
+    printf("%s\n", "GOT CONFIRMATION");
+}
+
+void GpuWatcherDaemon::Server(QString vmName)
+{
+    GpuWatcherDaemon daemon(true);
+    daemon.shm = new QSharedMemory();
+    INSTANCE_INFO *info;
+    pid_t child = 0;
     int maxfd, fd;
 
-    switch (fork()) {                   /* Become background process */
-    case -1: return -1;
-    case 0:  break;                     /* Child falls through... */
-    default: _exit(EXIT_SUCCESS);       /* while parent terminates */
+    daemon.shm->setKey(GpuWatcherDaemon::GetShmName(vmName));
+    for(;;) {
+        while(!daemon.shm->attach());
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        if (info->initialized == 257 && info->serverPid == getpid()) {
+            info->initialized = 1;
+            break;
+        }
+        daemon.shm->unlock();
+        daemon.shm->detach();
+        sleep(5);
+    }
+    printf("%s\n", "GOT INIT");
+    fflush(stdout);
+    daemon.shm->unlock();
+
+    if (setsid() == -1) {                 /* Become leader of new session */
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->err = errno;
+        strcpy(info->message, "Error at GpuWatcherDaemon::Server::setsid()");
+
+        goto die_with_lock;
     }
 
-    if (setsid() == -1)                 /* Become leader of new session */
-        return -1;
+    switch (child = fork()) {
+    case -1:
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->err = errno;
+        strcpy(info->message, "Error at GpuWatcherDaemon::Server::fork()");
 
-    switch (fork()) {                   /* Ensure we are not session leader */
-    case -1: return -1;
-    case 0:  break;
-    default: _exit(EXIT_SUCCESS);
+        goto die_with_lock;
+    case 0:
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->daemonPid = getpid();
+        daemon.shm->unlock();
+        break;
+    default:
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->serverFinished = 1;
+        daemon.shm->unlock();
+        daemon.shm->detach();
+        _exit(EXIT_SUCCESS);
     }
 
-    if (!(flags & BD_NO_UMASK0))
-        umask(0);                       /* Clear file mode creation mask */
+    umask(0);
+    chdir("/");
 
-    if (!(flags & BD_NO_CHDIR))
-        chdir("/");                     /* Change to root directory */
+    maxfd = sysconf(_SC_OPEN_MAX);
+    if (maxfd == -1)                /* Limit is indeterminate... */
+        maxfd = BD_MAX_CLOSE;       /* so take a guess */
 
-    if (!(flags & BD_NO_CLOSE_FILES)) { /* Close all open files */
-        maxfd = sysconf(_SC_OPEN_MAX);
-        if (maxfd == -1)                /* Limit is indeterminate... */
-            maxfd = BD_MAX_CLOSE;       /* so take a guess */
+    for (fd = 0; fd < maxfd; fd++)
+        close(fd);
 
-        for (fd = 0; fd < maxfd; fd++)
-            close(fd);
+    close(STDIN_FILENO);
+    fd = open("/dev/null", O_RDWR);
+
+    if (fd != STDIN_FILENO) {
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->err = errno;
+        strcpy(info->message, "Error at GpuWatcherDaemon::Server::open(STDIN)");
+
+        goto die_with_lock;
+    }
+    if (dup2(STDIN_FILENO, STDOUT_FILENO) != STDOUT_FILENO) {
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->err = errno;
+        strcpy(info->message, "Error at GpuWatcherDaemon::Server::dup2(STDOUT)");
+
+        goto die_with_lock;
+
+    }
+    if (dup2(STDIN_FILENO, STDERR_FILENO) != STDERR_FILENO) {
+        daemon.shm->lock();
+        info = (INSTANCE_INFO *)daemon.shm->data();
+        info->err = errno;
+        strcpy(info->message, "Error at GpuWatcherDaemon::Server::fork(STDERR)");
+
+        goto die_with_lock;
     }
 
-    if (!(flags & BD_NO_REOPEN_STD_FDS)) {
-        close(STDIN_FILENO);            /* Reopen standard fd's to /dev/null */
+    goto exec_container;
 
-        fd = open("/dev/null", O_RDWR);
 
-        if (fd != STDIN_FILENO)         /* 'fd' should be 0 */
-            return -1;
-        if (dup2(STDIN_FILENO, STDOUT_FILENO) != STDOUT_FILENO)
-            return -1;
-        if (dup2(STDIN_FILENO, STDERR_FILENO) != STDERR_FILENO)
-            return -1;
-    }
+die_with_lock:
+    daemon.shm->unlock();
+    daemon.shm->detach();
+    return;
 
-    return 0;
+exec_container:
+    //Operations::GO(&daemon);
+    return;
 }
+
+void GpuWatcherDaemon::guard(QString message)
+{
+    if (this->shm == nullptr)
+        return;
+    INSTANCE_INFO *info;
+    this->shm->lock();
+    info = (INSTANCE_INFO *)this->shm->data();
+    if (message.length() < sizeof(info->status)) {
+        memset(info->status, 0, sizeof(info->status));
+        strcpy(info->status, message.toUtf8().data());
+    }
+    this->shm->unlock();
+}
+

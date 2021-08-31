@@ -12,6 +12,7 @@
 #include "../util/MsgBox.h"
 #include "../util/SAFE_RETURN.h"
 #include "../util/HANDLE_UI_RETURN.h"
+#include "../src/daemonize.h"
 
 
 Main::Main(QWidget* parent) :
@@ -57,7 +58,11 @@ Main::Main(QWidget* parent) :
 
 void Main::Go()
 {
-    Operations::GO();
+    SAFE_RETURN status;
+    GpuWatcherDaemon::Exec(&status, m_ui->txtVmName->text());
+    // This method will only return on error
+    if (!IS_OK(status))
+        HANDLE_UI_RETURN::HANDLE(&status);
 }
 
 void Main::CloseMe()
@@ -196,7 +201,11 @@ void Main::saveVmName()
 
 void Main::saveUsername()
 {
-    Operations::SetUser(m_ui->txtUsername->text());
+    SAFE_RETURN status;
+    Operations::SetUser(&status, m_ui->txtUsername->text());
+    if (!IS_OK(status)) {
+        HANDLE_UI_RETURN::HANDLE(&status);
+    }
 }
 
 void Main::saveVmXConfigChooser()
@@ -205,7 +214,11 @@ void Main::saveVmXConfigChooser()
     diag.exec();
 
     if (diag.result() == QFileDialog::DialogCode::Accepted) {
-        Operations::SetVmXConfig(diag.selectedFiles()[0]);
+        SAFE_RETURN status;
+        Operations::SetVmXConfig(&status, diag.selectedFiles()[0]);
+        if (!IS_OK(status)) {
+            HANDLE_UI_RETURN::HANDLE(&status);
+        }
     }
 }
 
@@ -215,7 +228,11 @@ void Main::saveNormalXConfigChooser()
     diag.exec();
 
     if (diag.result() == QFileDialog::DialogCode::Accepted) {
-        Operations::SetNonVmXConfig(diag.selectedFiles()[0]);
+        SAFE_RETURN status;
+        Operations::SetNonVmXConfig(&status, diag.selectedFiles()[0]);
+        if (!IS_OK(status)) {
+            HANDLE_UI_RETURN::HANDLE(&status);
+        }
     }
 }
 

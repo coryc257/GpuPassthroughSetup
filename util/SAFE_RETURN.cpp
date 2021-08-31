@@ -3,7 +3,6 @@
 
 SAFE_RETURN::SAFE_RETURN()
 {
-    this->Status = true;
     this->StatusCode = OK;
 }
 

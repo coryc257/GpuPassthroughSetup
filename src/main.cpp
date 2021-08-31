@@ -3,7 +3,7 @@
 #include <QThread>
 #include "exec_container.h"
 #include "daemonize.h"
-
+#include "../util/SAFE_RETURN.h"
 #include "exec_container.h"
 
 int main(int argc, char *argv[])
@@ -19,7 +19,12 @@ int main(int argc, char *argv[])
     gpu_rebind();
     x_UP();
     */
-
+    SAFE_RETURN snake;
+    //GpuWatcherDaemon::Exec(&snake, QStringLiteral("win10"));
+    GpuWatcherDaemon daemon(true);
+    Operations::SetVMName(&snake, QStringLiteral("Itunes"));
+    Operations::GO(&daemon);
+    return 0;
 
     // TODO: PCI Device Selection
     if (argc == 1 ) { //GUI

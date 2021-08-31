@@ -1,0 +1,19 @@
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: /home/el/projects/GpuPassthroughSetup/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_421cf/fast && gmake: *** No rule to make target 'cmTC_421cf/fast'.  Stop.
+
+
+
+Determining if the include file pthread.h exists failed with the following output:
+Change Dir: /home/el/projects/GpuPassthroughSetup/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/gmake cmTC_36fea/fast && /usr/bin/gmake  -f CMakeFiles/cmTC_36fea.dir/build.make CMakeFiles/cmTC_36fea.dir/build
+gmake[1]: Entering directory '/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/CMakeTmp'
+CMakeFiles/cmTC_36fea.dir/build.make:80: CMakeFiles/cmTC_36fea.dir/flags.make: No such file or directory
+gmake[1]: *** No rule to make target 'CMakeFiles/cmTC_36fea.dir/flags.make'.  Stop.
+gmake[1]: Leaving directory '/home/el/projects/GpuPassthroughSetup/build/CMakeFiles/CMakeTmp'
+gmake: *** [Makefile:140: cmTC_36fea/fast] Error 2
+
+
+

@@ -10,6 +10,31 @@
 #include "../util/SAFE_RETURN.h"
 //QStandardPaths::standardLocations(QStandardPaths::StandardLocation::HomeLocation)[0]
 #define CONFIG_FOLDER QStringLiteral("/root/.gpu_passthrough")
+
+// Template macros
+template <class T>
+static QString join_str(QList<T> &list, QString separator, const std::function<QString (const T &item)> toStr)
+{
+    QString output;
+    for (int j = 0; j < list.size(); j++)
+    {
+        output.append((j ? separator : QStringLiteral("")) + toStr(list[j]));
+    }
+    return output;
+}
+
+template <class CT>
+static bool contains_value(QList<CT> &search, const CT &forV, std::function<bool (const CT &v1, const CT &v2)> cmpOp)
+{
+    int size = search.count();
+    for (int j = 0; j < search.count(); j ++)
+        if (cmpOp(search[j], forV))
+            return true;
+    return false;
+}
+
+
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //ExecContainer
 //{
@@ -137,12 +162,19 @@
         return retVal;
     }
 
+
+
+    // TODO: Optimize
     static void __init_cpu_tune(CpuTune *ti, QString ramGB, QString cpuCores, QString vmName)
     {
         ti->Success = false;
 
         QList<CPU_CORE> cpuInfo = __GetCpuInfo();
-
+        auto cpuCoreCmpFunc = [](const CPU_CORE &v1, const CPU_CORE &v2)->bool
+                        {
+                            //qInfo("CPU CHECK{%s, %s}\n", qPrintable(v1.CPU), qPrintable(v2.CPU));
+                            return v1.CPU == v2.CPU;
+                        };
 
         ti->ram = ramGB.split(QStringLiteral(" "))[0].toInt();
         ti->cores = cpuCores.split(QStringLiteral(" "))[0].toInt();
@@ -174,6 +206,7 @@
                     int l3 = core.L3.toInt();
                     if (l3 == 0) {
                         ti->emulatorPin.append(core.CPU.toInt());
+                        ti->freeCores.append(core);
                     } else if (l3 == 1) {
                         ti->assignedCores.append(core);
                     }
@@ -189,21 +222,21 @@
 
             // Start with odds
             for (int j = 1; j < groupCount; j += 2) {
-                Q_FOREACH(CPU_CORE core, ti->l1Groups[ti->l1Groups.keys()[j]]) {
-                    ti->assignedCores.append(core);
+                if (!(ti->assignedCores.count() == ti->cores)) {
+                    Q_FOREACH(CPU_CORE core, ti->l1Groups[ti->l1Groups.keys()[j]]) {
+                        ti->assignedCores.append(core);
+                    }
                 }
-                if (ti->assignedCores.count() == ti->cores)
-                    goto got_cores;
             }
 
             // Work backwards
             // Make sure we have at least two cores to pin to the emulator
             for (int j = (groupCount % 2 == 0) ? groupCount - 2 : groupCount - 1; j > 0; j -= 2) {
-                Q_FOREACH(CPU_CORE core, ti->l1Groups[ti->l1Groups.keys()[j]]) {
-                    ti->assignedCores.append(core);
+                if (!(ti->assignedCores.count() == ti->cores)) {
+                    Q_FOREACH(CPU_CORE core, ti->l1Groups[ti->l1Groups.keys()[j]]) {
+                        ti->assignedCores.append(core);
+                    }
                 }
-                if (ti->assignedCores.count() == ti->cores)
-                    goto got_cores;
             }
 
             if (ti->assignedCores.count() != ti->cores) {
@@ -211,13 +244,21 @@
             }
         }
 
-        got_cores:
-
         Q_FOREACH(CPU_CORE core, ti->l1Groups[0]) {
             ti->emulatorPin.append(core.CPU.toInt());
         }
 
-        ti->vmConfig = __generation_cpu_tune(ti->assignedCores, ti->emulatorPin, ti->ram);
+        Q_FOREACH(CPU_CORE core, cpuInfo) {
+            //qInfo("Core:%s\n", qPrintable(core.CPU));
+            if (!contains_value<CPU_CORE>(
+                    ti->assignedCores,
+                    core,
+                    cpuCoreCmpFunc
+            ))
+                ti->freeCores.append(core);
+        }
+
+        ti->vmConfig = __generation_cpu_tune(ti->assignedCores, ti->emulatorPin, ti->ramKiB);
         ti->Success = true;
         return;
 
@@ -374,21 +415,20 @@
     {
 
 
-        QString qEmuCommandLineXml = QStringLiteral("<qemu:commandline>\n\t<qemu:arg value='-object'/>\n\t<qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/event")+
+        QString qEmuCommandLineXml = QStringLiteral("\n\n\n<qemu:commandline>\n\t<qemu:arg value='-object'/>\n\t<qemu:arg value='input-linux,id=kbd1,evdev=/dev/input/event")+
                                     device+QStringLiteral(",grab_all=on,repeat=on'/>\n</qemu:commandline>");
 
         BashCommand(QStringLiteral("printf \"%s\" \"")+device+QStringLiteral("\" > ") + CONFIG_FOLDER + QStringLiteral("/keyboard.param"));
         QProcess virshTerm;
         virshTerm.startDetached("xterm", QStringList({QStringLiteral("-e"), QStringLiteral("virsh"), QStringLiteral("edit"), vmName}));
-        MsgBox(QStringLiteral("Place this under </devices> before </domain>... Middle click to paste\n\n")+qEmuCommandLineXml);
+        MsgBox(QStringLiteral("Place after </devices> before </domain>... Middle click to paste\n\n")+qEmuCommandLineXml);
     }
 
     void Operations::SavePassthroughMouse(QString mouseIdentity)
     {
         QStringList mParts = mouseIdentity.trimmed().split(QStringLiteral(":"));
         if (mParts.count() == 2) {
-            QString mouseToggleXML =    QStringLiteral("#")+mouseIdentity+QStringLiteral("\n")+
-                                        QStringLiteral("#FirstLineMustbe xxxx:xxxx\n<hostdev mode='subsystem' type='usb' managed='no'>\n\t<source>\n\t\t<vendor id='0x") +
+            QString mouseToggleXML =    QStringLiteral("<hostdev mode='subsystem' type='usb' managed='no'>\n\t<source>\n\t\t<vendor id='0x") +
                                         mParts[0].replace(QStringLiteral("'"), QStringLiteral("\\'")) +
                                         QStringLiteral("' />\n\t\t<product id='0x") +
                                         mParts[1].replace(QStringLiteral("'"), QStringLiteral("\\'")) +
@@ -676,10 +716,10 @@
         }
 
         if (!(res = Operations::BashCommand(QStringLiteral("rmmod vfio-pci"))).Success) {
-            if (!res.Output.contains(QStringLiteral("is not currently loaded"))) {
+            /*if (!res.Output.contains(QStringLiteral("is not currently loaded"))) {
                 Operations::pointOfFailure = 7;
                 return;
-            }
+            }*/
         }
 
         for (int j = 0; j < Operations::deviceList.count(); j++) {
@@ -702,12 +742,31 @@
 
     void Operations::RevertGPU()
     {
-        Operations::BashCommand(QStringLiteral("modprobe nvidia"));
+        for (int j = 0; j < Operations::detachedDeviceList.count(); j++) {
+            if (!Operations::BashCommand(QStringLiteral("virsh nodedev-detach ")+Operations::deviceList[j]).Success) {
+                Operations::pointOfFailure = 8;
+            }
+        }
+        for (int j = 0; j < Operations::detachedDeviceList.count(); j++) {
+            if (!Operations::BashCommand(QStringLiteral("virsh nodedev-reattach ")+Operations::deviceList[j]).Success) {
+                Operations::pointOfFailure = 8;
+            }
+        }
         QThread::sleep(10);
-        Operations::BashCommand(QStringLiteral("echo 0 > /sys/class/vtconsole/vtcon0/bind"));
-        Operations::BashCommand(QStringLiteral("echo 0 > /sys/class/vtconsole/vtcon1/bind"));
+        Operations::AppendLog(QStringLiteral("Reloading Drivers"));
+        Operations::BashCommand(QStringLiteral("modprobe nvidia"));
+        Operations::BashCommand(QStringLiteral("modprobe nvidia_modeset"));
+        Operations::BashCommand(QStringLiteral("modprobe nvidia_uvm"));
+        Operations::BashCommand(QStringLiteral("modprobe nvidia_drm"));
+        QThread::sleep(10);
+        Operations::AppendLog(QStringLiteral("Binding"));
+        Operations::BashCommand(QStringLiteral("echo 1 > /sys/class/vtconsole/vtcon0/bind"));
+        //Operations::BashCommand(QStringLiteral("echo 0 > /sys/class/vtconsole/vtcon1/bind"));
+        Operations::AppendLog(QStringLiteral("x-config"));
+        Operations::BashCommand(QStringLiteral("nvidia-xconfig --query-gpu-info > /dev/null 2>&1"));
+        Operations::AppendLog(QStringLiteral("Framebuffer"));
         Operations::BashCommand(
-            QStringLiteral("echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/unbind")
+            QStringLiteral("echo efi-framebuffer.0 > /sys/bus/platform/drivers/efi-framebuffer/bind")
         );
         QThread::sleep(10);
     }
@@ -792,6 +851,60 @@
 
 
 
+    void Operations::PartitionCpu()
+    {
+        CpuTune tuneInfo;
+        QString hostCpus;
+        __init_cpu_tune(&tuneInfo, Operations::Ram, Operations::Cpu, Operations::vmName);
+
+        hostCpus = join_str(tuneInfo.freeCores, QStringLiteral(","),
+                                          (const std::function<QString (const CPU_CORE &item) >)
+                                           []
+                                            (const CPU_CORE item)->QString{return item.CPU; });
+
+        Operations::BashCommand(QStringLiteral("systemctl set-property --runtime -- user.slice AllowedCPUs=")+hostCpus);
+        Operations::BashCommand(QStringLiteral("systemctl set-property --runtime -- system.slice AllowedCPUs=")+hostCpus);
+        Operations::BashCommand(QStringLiteral("systemctl set-property --runtime -- init.scope AllowedCPUs=")+hostCpus);
+
+        Operations::BashCommand(QStringLiteral("systemctl restart libvirtd.service"));
+    }
+
+    void Operations::UnPartitionCpu()
+    {
+        Operations::BashCommand(QStringLiteral("systemctl set-property --runtime -- user.slice AllowedCPUs=0-2000"));
+        Operations::BashCommand(QStringLiteral("systemctl set-property --runtime -- system.slice AllowedCPUs=0-2000"));
+        Operations::BashCommand(QStringLiteral("systemctl set-property --runtime -- init.scope AllowedCPUs=0-2000"));
+    }
+
+    void Operations::SendMouse()
+    {
+        Operations::Init();
+        QString cmd = QStringLiteral("virsh attach-device ")+
+            Operations::vmName+
+            QStringLiteral(" ")+
+            CONFIG_FOLDER + QStringLiteral("/toggle_mouse.xml");
+        Operations::BashCommand(
+            cmd
+        );
+    }
+
+    void Operations::ReceiveMouse()
+    {
+        Operations::Init();
+        QString cmd = QStringLiteral("virsh detach-device ")+
+            Operations::vmName+
+            QStringLiteral(" ")+
+            CONFIG_FOLDER + QStringLiteral("/toggle_mouse.xml");
+        Operations::BashCommand(
+            cmd
+        );
+    }
+
+
+
+
+
+
     void Operations::GO(GpuWatcherDaemon *angel)
     {
         //qInfo("Status:%d\n", Operations::pointOfFailure);
@@ -811,8 +924,6 @@
         Operations::DEBUG();
         angel->guard(QStringLiteral("Before: ClearLog()"));
         //Operations::debugOnly = true;
-
-        goto monitor;
 
         //
         // Stop the XServer
@@ -842,6 +953,11 @@
             goto recovery;
         }
 
+        Operations::PartitionCpu();
+        if (Operations::pointOfFailure != 0) {
+            goto recovery;
+        }
+
         // Start X Server
         Operations::StartX();
         if (Operations::pointOfFailure != 0) {
@@ -858,6 +974,7 @@
         goto monitor;
 recovery:
         // TODO: figure out unwind based upon point of pointOfFailure
+        Operations::AppendLog(QString("Point of Failure:") + QString::number(Operations::pointOfFailure));
         goto false_recovery;
         return;
 
@@ -865,13 +982,12 @@ monitor:
         // TODO: wait for vm to exit
         QThread::sleep(20);
         for(;;){
-            BashCommandResult res = BashCommand(QStringLiteral("virsh list --name | grep ")+ Operations::vmName);
+            BashCommandResult res = BashCommandNoLog(QStringLiteral("virsh list --name | grep ")+ Operations::vmName);
             if (!res.Success)
                 break;
         }
-
-        if (Operations::revertOnVmExit) {
 false_recovery:
+        if (Operations::revertOnVmExit) {
             Operations::StopX();
             Operations::UnbindGPU();
             QThread::sleep(10);
@@ -880,6 +996,7 @@ false_recovery:
             Operations::WipeKScreen(Operations::userName);
             Operations::RevertGPU();
             QThread::sleep(10);
+            Operations::UnPartitionCpu();
             Operations::StartX();
         }
         exit(EXIT_SUCCESS);

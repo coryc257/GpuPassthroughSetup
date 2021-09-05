@@ -543,7 +543,7 @@
    <widget class="QLabel" name="lblRam">
     <property name="geometry">
      <rect>
-      <x>190</x>
+      <x>150</x>
       <y>30</y>
       <width>141</width>
       <height>22</height>
@@ -566,7 +566,7 @@
    <widget class="QLineEdit" name="txtRam">
     <property name="geometry">
      <rect>
-      <x>200</x>
+      <x>150</x>
       <y>50</y>
       <width>113</width>
       <height>36</height>
@@ -576,8 +576,8 @@
    <widget class="QPushButton" name="btnEditRamCPU">
     <property name="geometry">
      <rect>
-      <x>360</x>
-      <y>40</y>
+      <x>289</x>
+      <y>44</y>
       <width>99</width>
       <height>38</height>
      </rect>
@@ -586,6 +586,55 @@
      <string>Edit cpu/ram</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="chkRestartX">
+    <property name="geometry">
+     <rect>
+      <x>492</x>
+      <y>47</y>
+      <width>41</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textEdit">
+    <property name="geometry">
+     <rect>
+      <x>412</x>
+      <y>41</y>
+      <width>121</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>8</pointsize>
+     </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+    <property name="html">
+     <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Noto Sans'; font-size:8pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:6pt;&quot;&gt;Restart X Server&lt;/span&gt;&lt;/p&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:6pt;&quot;&gt;On Vm Exit&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+   </widget>
+   <zorder>textEdit</zorder>
+   <zorder>btnMouseToggle</zorder>
+   <zorder>btnGo</zorder>
+   <zorder>scrollArea</zorder>
+   <zorder>lblCores</zorder>
+   <zorder>lblRam</zorder>
+   <zorder>txtCores</zorder>
+   <zorder>txtRam</zorder>
+   <zorder>btnEditRamCPU</zorder>
+   <zorder>chkRestartX</zorder>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -629,6 +678,37 @@
    </property>
   </action>
  </widget>
+ <tabstops>
+  <tabstop>btnGo</tabstop>
+  <tabstop>btnMouseToggle</tabstop>
+  <tabstop>txtCores</tabstop>
+  <tabstop>txtRam</tabstop>
+  <tabstop>btnEditRamCPU</tabstop>
+  <tabstop>textEdit</tabstop>
+  <tabstop>chkRestartX</tabstop>
+  <tabstop>scrollArea</tabstop>
+  <tabstop>txtVmName</tabstop>
+  <tabstop>btnVmNameFind</tabstop>
+  <tabstop>btnVmNameSave</tabstop>
+  <tabstop>txtUsername</tabstop>
+  <tabstop>btnUsernameFind</tabstop>
+  <tabstop>btnUsernameSave</tabstop>
+  <tabstop>txtVmXConfig</tabstop>
+  <tabstop>btnVmXConfigFind</tabstop>
+  <tabstop>btnVMXConfigPick</tabstop>
+  <tabstop>txtNormalXConfig</tabstop>
+  <tabstop>btnNormalXConfigFind</tabstop>
+  <tabstop>btnNormalXConfigPick</tabstop>
+  <tabstop>txtEvDevKeyboard</tabstop>
+  <tabstop>btnEvDevKeyboardFind</tabstop>
+  <tabstop>btnEvDevKeyboardEdit</tabstop>
+  <tabstop>txtPassthroughMouse</tabstop>
+  <tabstop>btnPassthroughMouseFind</tabstop>
+  <tabstop>btnPassthroughMouseSave</tabstop>
+  <tabstop>txtIOMMUGroup</tabstop>
+  <tabstop>btnIOMMUGroupFind</tabstop>
+  <tabstop>btnIOMMUGroupSave</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>

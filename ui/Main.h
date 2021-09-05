@@ -25,7 +25,7 @@ private:
     void resizeEvent(QResizeEvent *e) override;
     int originalHeight;
     int scrollerOriginalHeight;
-
+    bool mouseState;
 
 
 private slots:
@@ -53,6 +53,9 @@ private slots:
     // Pickers
     void saveVmXConfigChooser();
     void saveNormalXConfigChooser();
+
+    // Toggles
+    void toggleMouse();
 
 
 

@@ -8,24 +8,6 @@
 
 int main(int argc, char *argv[])
 {
-    //QApplication app(argc, argv);
-    //GpuPassthroughSetup w;
-
-    /*
-    DAEMONIZE(0);
-    x_DOWN();
-    QThread::sleep(5);
-    gpu_unbind();
-    gpu_rebind();
-    x_UP();
-    */
-    SAFE_RETURN snake;
-    //GpuWatcherDaemon::Exec(&snake, QStringLiteral("win10"));
-    GpuWatcherDaemon daemon(true);
-    Operations::SetVMName(&snake, QStringLiteral("Itunes"));
-    Operations::GO(&daemon);
-    return 0;
-
     // TODO: PCI Device Selection
     if (argc == 1 ) { //GUI
         QApplication app(argc, argv);

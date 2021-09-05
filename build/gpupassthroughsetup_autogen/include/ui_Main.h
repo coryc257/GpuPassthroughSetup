@@ -12,6 +12,7 @@
 #include <QtCore/QVariant>
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
+#include <QtWidgets/QCheckBox>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
@@ -19,6 +20,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QScrollArea>
+#include <QtWidgets/QTextEdit>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -74,6 +76,8 @@ public:
     QLineEdit *txtCores;
     QLineEdit *txtRam;
     QPushButton *btnEditRamCPU;
+    QCheckBox *chkRestartX;
+    QTextEdit *textEdit;
     QMenuBar *menubar;
     QMenu *menuFile;
     QMenu *menuAbout;
@@ -231,17 +235,37 @@ public:
         lblCores->setGeometry(QRect(20, 30, 121, 22));
         lblRam = new QLabel(centralwidget);
         lblRam->setObjectName(QString::fromUtf8("lblRam"));
-        lblRam->setGeometry(QRect(190, 30, 141, 22));
+        lblRam->setGeometry(QRect(150, 30, 141, 22));
         txtCores = new QLineEdit(centralwidget);
         txtCores->setObjectName(QString::fromUtf8("txtCores"));
         txtCores->setGeometry(QRect(20, 50, 113, 36));
         txtRam = new QLineEdit(centralwidget);
         txtRam->setObjectName(QString::fromUtf8("txtRam"));
-        txtRam->setGeometry(QRect(200, 50, 113, 36));
+        txtRam->setGeometry(QRect(150, 50, 113, 36));
         btnEditRamCPU = new QPushButton(centralwidget);
         btnEditRamCPU->setObjectName(QString::fromUtf8("btnEditRamCPU"));
-        btnEditRamCPU->setGeometry(QRect(360, 40, 99, 38));
+        btnEditRamCPU->setGeometry(QRect(289, 44, 99, 38));
+        chkRestartX = new QCheckBox(centralwidget);
+        chkRestartX->setObjectName(QString::fromUtf8("chkRestartX"));
+        chkRestartX->setGeometry(QRect(492, 47, 41, 31));
+        textEdit = new QTextEdit(centralwidget);
+        textEdit->setObjectName(QString::fromUtf8("textEdit"));
+        textEdit->setGeometry(QRect(412, 41, 121, 41));
+        QFont font;
+        font.setPointSize(8);
+        textEdit->setFont(font);
+        textEdit->setReadOnly(true);
         Main->setCentralWidget(centralwidget);
+        textEdit->raise();
+        btnMouseToggle->raise();
+        btnGo->raise();
+        scrollArea->raise();
+        lblCores->raise();
+        lblRam->raise();
+        txtCores->raise();
+        txtRam->raise();
+        btnEditRamCPU->raise();
+        chkRestartX->raise();
         menubar = new QMenuBar(Main);
         menubar->setObjectName(QString::fromUtf8("menubar"));
         menubar->setGeometry(QRect(0, 0, 756, 34));
@@ -250,6 +274,34 @@ public:
         menuAbout = new QMenu(menubar);
         menuAbout->setObjectName(QString::fromUtf8("menuAbout"));
         Main->setMenuBar(menubar);
+        QWidget::setTabOrder(btnGo, btnMouseToggle);
+        QWidget::setTabOrder(btnMouseToggle, txtCores);
+        QWidget::setTabOrder(txtCores, txtRam);
+        QWidget::setTabOrder(txtRam, btnEditRamCPU);
+        QWidget::setTabOrder(btnEditRamCPU, textEdit);
+        QWidget::setTabOrder(textEdit, chkRestartX);
+        QWidget::setTabOrder(chkRestartX, scrollArea);
+        QWidget::setTabOrder(scrollArea, txtVmName);
+        QWidget::setTabOrder(txtVmName, btnVmNameFind);
+        QWidget::setTabOrder(btnVmNameFind, btnVmNameSave);
+        QWidget::setTabOrder(btnVmNameSave, txtUsername);
+        QWidget::setTabOrder(txtUsername, btnUsernameFind);
+        QWidget::setTabOrder(btnUsernameFind, btnUsernameSave);
+        QWidget::setTabOrder(btnUsernameSave, txtVmXConfig);
+        QWidget::setTabOrder(txtVmXConfig, btnVmXConfigFind);
+        QWidget::setTabOrder(btnVmXConfigFind, btnVMXConfigPick);
+        QWidget::setTabOrder(btnVMXConfigPick, txtNormalXConfig);
+        QWidget::setTabOrder(txtNormalXConfig, btnNormalXConfigFind);
+        QWidget::setTabOrder(btnNormalXConfigFind, btnNormalXConfigPick);
+        QWidget::setTabOrder(btnNormalXConfigPick, txtEvDevKeyboard);
+        QWidget::setTabOrder(txtEvDevKeyboard, btnEvDevKeyboardFind);
+        QWidget::setTabOrder(btnEvDevKeyboardFind, btnEvDevKeyboardEdit);
+        QWidget::setTabOrder(btnEvDevKeyboardEdit, txtPassthroughMouse);
+        QWidget::setTabOrder(txtPassthroughMouse, btnPassthroughMouseFind);
+        QWidget::setTabOrder(btnPassthroughMouseFind, btnPassthroughMouseSave);
+        QWidget::setTabOrder(btnPassthroughMouseSave, txtIOMMUGroup);
+        QWidget::setTabOrder(txtIOMMUGroup, btnIOMMUGroupFind);
+        QWidget::setTabOrder(btnIOMMUGroupFind, btnIOMMUGroupSave);
 
         menubar->addAction(menuFile->menuAction());
         menubar->addAction(menuAbout->menuAction());
@@ -295,6 +347,13 @@ public:
         lblCores->setText(QCoreApplication::translate("Main", "# Cores For VM", nullptr));
         lblRam->setText(QCoreApplication::translate("Main", "Ram In GB for VM", nullptr));
         btnEditRamCPU->setText(QCoreApplication::translate("Main", "Edit cpu/ram", nullptr));
+        chkRestartX->setText(QString());
+        textEdit->setHtml(QCoreApplication::translate("Main", "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.0//EN\" \"http://www.w3.org/TR/REC-html40/strict.dtd\">\n"
+"<html><head><meta name=\"qrichtext\" content=\"1\" /><style type=\"text/css\">\n"
+"p, li { white-space: pre-wrap; }\n"
+"</style></head><body style=\" font-family:'Noto Sans'; font-size:8pt; font-weight:400; font-style:normal;\">\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:6pt;\">Restart X Server</span></p>\n"
+"<p style=\" margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;\"><span style=\" font-size:6pt;\">On Vm Exit</span></p></body></html>", nullptr));
         menuFile->setTitle(QCoreApplication::translate("Main", "File", nullptr));
         menuAbout->setTitle(QCoreApplication::translate("Main", "About", nullptr));
     } // retranslateUi

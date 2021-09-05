@@ -54,6 +54,7 @@ public:
     bool Success;
     QString ErrorMessage;
     QList<CPU_CORE> assignedCores;
+    QList<CPU_CORE> freeCores;
     QList<int> emulatorPin;
     QMap<int, int> l3Groups;
     QMap<int, QList<CPU_CORE>> l1Groups;
@@ -90,6 +91,9 @@ public:
     static void SetVMName       (SAFE_RETURN *retVal, QString vmName);
     static void SaveIOMMU       (SAFE_RETURN *retVal, QString iommuGroup, QString vmName);
 
+    static void SendMouse();
+    static void ReceiveMouse();
+
     static void GO(GpuWatcherDaemon *angel);
 
     static QString vmName;
@@ -111,6 +115,8 @@ public:
     static BashCommandResult BashCommandNoLog(QString command);
     static QString CatThat(QString fileName);
 
+
+
 private:
 
     static __EXEC_INSTANCE me;
@@ -130,6 +136,8 @@ private:
     static void UnbindGPU();
     static void BindGPU();
     static void StartVM();
+    static void PartitionCpu();
+    static void UnPartitionCpu();
 
     static void DEBUG();
 

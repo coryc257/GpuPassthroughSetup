@@ -758,6 +758,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qrgb.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qrgba64.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextcursor.h
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextdocument.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextformat.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qtextoption.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qtgui-config.h
@@ -769,6 +770,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtGui/qwindowdefs_win.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QAction
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QApplication
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QCheckBox
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QDialog
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QFileDialog
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QLabel
@@ -779,12 +781,14 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QMessageBox
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QPushButton
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QScrollArea
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QTextEdit
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/QWidget
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractbutton.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qabstractscrollarea.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qaction.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qactiongroup.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qapplication.h
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qcheckbox.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdesktopwidget.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qdialog.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qfiledialog.h
@@ -799,6 +803,7 @@ CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qscrollarea.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qsizepolicy.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtabwidget.h
+CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtextedit.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgets-config.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qtwidgetsglobal.h
 CMakeFiles/gpupassthroughsetup.dir/ui/Main.cpp.o: /usr/include/x86_64-linux-gnu/qt5/QtWidgets/qwidget.h

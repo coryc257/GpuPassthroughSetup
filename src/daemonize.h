@@ -26,7 +26,7 @@ typedef struct __INSTANCE_INFO {
 class GpuWatcherDaemon
 {
 public:
-    static void Exec(SAFE_RETURN *failInfo, QString vmName);
+    static void Exec(SAFE_RETURN *failInfo, QString vmName, bool restartX);
     void guard(QString message);
     static QString GetShmName(QString vmName);
 
@@ -37,7 +37,7 @@ private:
     QSharedMemory *shm;
 
     static void Client(SAFE_RETURN *failInfo, QString vmName, pid_t child);
-    static void Server(QString vmName);
+    static void Server(QString vmName, bool restartX);
 };
 
 

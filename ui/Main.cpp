@@ -21,6 +21,7 @@ Main::Main(QWidget* parent) :
 {
     m_ui->setupUi(this);
 
+    this->mouseState = false;
     this->originalHeight = this->height();
     this->scrollerOriginalHeight = m_ui->scrollArea->height();
 
@@ -35,6 +36,7 @@ Main::Main(QWidget* parent) :
     m_ui->txtIOMMUGroup->setText(Operations::IOMMUGroup);
     m_ui->txtCores->setText(Operations::Cpu);
     m_ui->txtRam->setText(Operations::Ram);
+    m_ui->chkRestartX->setCheckState(Qt::CheckState::Unchecked);
 
     connect(m_ui->actionExit,               SIGNAL(triggered()),    this, SLOT(CloseMe()));
     connect(m_ui->actionHelp,               SIGNAL(triggered()),    this, SLOT(Help()));
@@ -54,12 +56,15 @@ Main::Main(QWidget* parent) :
     connect(m_ui->btnIOMMUGroupFind,        SIGNAL(clicked()),      this, SLOT(findIOMMU()));
     connect(m_ui->btnEditRamCPU,            SIGNAL(clicked()),      this, SLOT(saveCpuRam()));
     connect(m_ui->btnIOMMUGroupSave,        SIGNAL(clicked()),      this, SLOT(saveIOMMU()));
+    connect(m_ui->btnMouseToggle,           SIGNAL(clicked()),      this, SLOT(toggleMouse()));
 }
 
 void Main::Go()
 {
     SAFE_RETURN status;
-    GpuWatcherDaemon::Exec(&status, m_ui->txtVmName->text());
+    GpuWatcherDaemon::Exec(&status,
+                           m_ui->txtVmName->text(),
+                           m_ui->chkRestartX->checkState() == Qt::CheckState::Checked);
     // This method will only return on error
     if (!IS_OK(status))
         HANDLE_UI_RETURN::HANDLE(&status);
@@ -262,6 +267,17 @@ void Main::saveCpuRam()
 {
     Operations::SaveRamCpu(m_ui->txtRam->text(), m_ui->txtCores->text(), m_ui->txtVmName->text());
 }
+
+void Main::toggleMouse()
+{
+    if (this->mouseState) {
+        Operations::SendMouse();
+    } else {
+        Operations::ReceiveMouse();
+    }
+    this->mouseState = !this->mouseState;
+}
+
 
 
 

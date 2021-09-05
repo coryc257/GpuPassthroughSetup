@@ -49,7 +49,7 @@
 
 static void *watch_location;
 
-void GpuWatcherDaemon::Exec(SAFE_RETURN* failInfo, QString vmName)
+void GpuWatcherDaemon::Exec(SAFE_RETURN* failInfo, QString vmName, bool restartX)
 {
     pid_t childPid = 0;
     int err;
@@ -61,7 +61,7 @@ void GpuWatcherDaemon::Exec(SAFE_RETURN* failInfo, QString vmName)
             failInfo->returnData[QStringLiteral("ForkErrorNumber")] = RETURN_TYPE::fromQString(QString::number(err));
             return;
         case 0:
-            GpuWatcherDaemon::Server(vmName);
+            GpuWatcherDaemon::Server(vmName, restartX);
             break;
         default:
             GpuWatcherDaemon::Client(failInfo, vmName, childPid);
@@ -133,7 +133,7 @@ void GpuWatcherDaemon::Client(SAFE_RETURN* failInfo, QString vmName, pid_t child
     printf("%s\n", "GOT CONFIRMATION");
 }
 
-void GpuWatcherDaemon::Server(QString vmName)
+void GpuWatcherDaemon::Server(QString vmName, bool restartX)
 {
     GpuWatcherDaemon daemon(true);
     daemon.shm = new QSharedMemory();
@@ -238,7 +238,8 @@ die_with_lock:
     return;
 
 exec_container:
-    //Operations::GO(&daemon);
+    Operations::revertOnVmExit = true;
+    Operations::GO(&daemon);
     return;
 }
 
